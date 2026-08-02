@@ -42,26 +42,24 @@ Não fazem parte deste projeto:
 
 | Código | Descrição |
 |---------|-----------|
-| RF01 | O sistema deverá permitir autenticação de usuários autorizados. |
-| RF02 | O sistema deverá controlar níveis de acesso dos usuários. |
-| RF03 | O sistema deverá permitir o cadastro, edição e remoção de usuários administradores. |
-| RF04 | O sistema deverá permitir cadastrar grupos de horários. |
-| RF05 | O sistema deverá permitir editar grupos de horários. |
-| RF06 | O sistema deverá permitir excluir grupos de horários. |
-| RF07 | O sistema deverá permitir cadastrar horários em cada grupo. |
-| RF08 | O sistema deverá permitir editar horários cadastrados. |
-| RF09 | O sistema deverá permitir remover horários cadastrados. |
-| RF10 | O sistema deverá permitir definir um grupo de horários para datas específicas do calendário escolar. |
-| RF11 | O sistema deverá sincronizar automaticamente as alterações com o Arduino. |
-| RF12 | O sistema deverá exibir o estado da comunicação com o Arduino. |
-| RF13 | O sistema deverá permitir o acionamento manual do sinal. |
-| RF14 | O sistema deverá permitir pausar temporariamente o funcionamento automático (Modo Emergência). |
-| RF15 | O sistema deverá permitir reativar o funcionamento automático após o modo emergência. |
-| RF16 | O sistema deverá permitir configurar a duração do toque do sinal. |
-| RF17 | O sistema deverá registrar alterações administrativas realizadas pelos usuários. |
-| RF18 | O sistema deverá permitir exportar um backup das configurações. |
-| RF19 | O sistema deverá permitir restaurar um backup previamente exportado. |
-| RF20 | O sistema deverá apresentar um painel com informações do funcionamento do sistema. |
+| RF01 | O sistema deverá solicitar uma senha de acesso antes de permitir o gerenciamento das configurações. |
+| RF02 | O sistema deverá permitir cadastrar grupos de horários. |
+| RF03 | O sistema deverá permitir editar grupos de horários. |
+| RF04 | O sistema deverá permitir excluir grupos de horários. |
+| RF05 | O sistema deverá permitir cadastrar horários em cada grupo. |
+| RF06 | O sistema deverá permitir editar horários cadastrados. |
+| RF07 | O sistema deverá permitir remover horários cadastrados. |
+| RF18 | O sistema deverá permitir definir um grupo de horários para datas específicas do calendário escolar. |
+| RF19 | O sistema deverá sincronizar automaticamente as alterações com o Arduino. |
+| RF10 | O sistema deverá exibir o estado da comunicação com o Arduino. |
+| RF11 | O sistema deverá permitir o acionamento manual do sinal. |
+| RF12 | O sistema deverá permitir pausar temporariamente o funcionamento automático (Modo Emergência). |
+| RF13 | O sistema deverá permitir reativar o funcionamento automático após o modo emergência. |
+| RF14 | O sistema deverá permitir configurar a duração do toque do sinal. |
+| RF15 | O sistema deverá registrar alterações administrativas realizadas pelos usuários. |
+| RF16 | O sistema deverá permitir exportar um backup das configurações. |
+| RF17 | O sistema deverá permitir restaurar um backup previamente exportado. |
+| RF18 | O sistema deverá apresentar um painel com informações do funcionamento do sistema. |
 
 ---
 
@@ -75,7 +73,7 @@ Não fazem parte deste projeto:
 | RNF04 | O banco de dados deverá utilizar MySQL. |
 | RNF05 | A comunicação entre sistema e Arduino deverá ocorrer via Serial USB. |
 | RNF06 | As senhas deverão ser armazenadas utilizando criptografia (Hash). |
-| RNF07 | A autenticação deverá utilizar JSON Web Token (JWT). |
+| RNF07 | O acesso ao sistema deverá ser protegido por um mecanismo de autenticação baseado em senha. |
 | RNF08 | O sistema deverá possuir arquitetura modular. |
 | RNF09 | O código deverá seguir boas práticas de desenvolvimento. |
 | RNF10 | O sistema deverá ser compatível com os principais navegadores modernos. |

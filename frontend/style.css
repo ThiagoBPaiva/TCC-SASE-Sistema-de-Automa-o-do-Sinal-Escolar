@@ -1,0 +1,92 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1e3c72, #2a5298);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Container principal */
+.body {
+  background-color: white;
+  width: 400px;
+  padding: 40px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    font-size: 30px;
+    text-align: center;
+    margin-block-end: 15px;
+    color: #174A5E;
+}
+
+p {
+    font-weight: 700;
+}
+
+/* Formulário */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Campo de horário */
+input[type="time"] {
+  padding: 15px;
+  font-size: 18px;
+  border: 2px solid #2a5298;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.3s;
+}
+
+input[type="time"]:focus {
+  border-color: #1e3c72;
+  box-shadow: 0 0 8px rgba(42, 82, 152, 0.5);
+}
+
+/* Link Return */
+
+.link-return {
+    padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2a5298;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: center;
+  text-decoration: none;
+}
+
+/* Botão */
+input[type="submit"] {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  background-color: #2a5298;
+  color: white;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+input[type="submit"]:hover {
+  background-color: #1e3c72;
+  transform: scale(1.03);
+}
