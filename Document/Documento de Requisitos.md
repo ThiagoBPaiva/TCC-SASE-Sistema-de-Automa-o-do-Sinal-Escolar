@@ -2,7 +2,7 @@
 ## SASE - Sistema de Automação do Sinal Escolar
 
 **Versão:** 1.0
-**Data:** 30/07/2026
+**Data:** 31/07/2026
 **Autor:** Thiago Rodrigues
 
 ---

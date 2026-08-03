@@ -60,7 +60,7 @@ input[type="time"]:focus {
 /* Link Return */
 
 .link-return {
-    padding: 15px;
+  padding: 15px;
   border: none;
   border-radius: 8px;
   background-color: #2a5298;
@@ -71,6 +71,11 @@ input[type="time"]:focus {
   transition: 0.3s;
   text-align: center;
   text-decoration: none;
+}
+
+.link-return:hover {
+  background-color: #1e3c72;
+  transform: scale(1.03);
 }
 
 /* Botão */
