@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>SASE - SignUp</title>
+
+    <link rel="stylesheet" href="../style/singUp.css">
+</head>
+
+<body>
+    <main class="login-container">
+        <div id="toast" class="toast"></div>
+        <div class="login-card">
+            <!-- Logo -->
+            <div class="logo">
+                <div class="bell">
+                    <img
+                        src="../assets/SASE ICON.png"
+                        width="200"
+                    />
+                </div>
+
+                <div class="text">
+                    <h2 id="text">Crie uma nova conta</h1>
+                </div>
+            </div>
+
+            <!-- Formulário -->
+            <form id="formCadastro" class="login-form">
+                <div class="input-group">
+                    <label for="usuario">Usuário:</label>
+                    <input
+                        type="text"
+                        id="usuario"
+                        name="user"
+                        placeholder="Digite seu Usuário:"
+                        minlength="2"
+                        maxlength="80"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Digite seu Email:"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha:</label>
+                    <input
+                        type="password"
+                        id="senha"
+                        name="password"
+                        placeholder="Digite sua Senha:"
+                        minlength="6"
+                    >
+                </div>
+
+                <a href="/login" class="forgot-sign-up">
+                    Logar com minha conta
+                </a>
+
+                <button type="submit">
+                    Entrar
+                </button>
+
+                <a href="#" class="forgot-password">
+                    Esqueceu sua senha?
+                </a>
+            </form>
+        </div>
+    </main>
+
+    <script src="../script/mensageCreateCont.js"></script>
+</body>
+</html>
