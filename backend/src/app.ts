@@ -1,36 +1,21 @@
 import express from "express";
-import { Request, Response } from "express";
 import path from "path";
+import * as dotenv from "dotenv";
+// ---
+import { router } from "./routers/router"
+import { conexion } from './config/db'
+// ---
+conexion();
 
-import { ArduinoConexion } from "./communication"
+dotenv.config();
 
 const app = express();
-const port: number = 3000;
-const arduino = new ArduinoConexion();
-
+const port: number = Number(process.env.PORT);
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "../../frontend")));
+app.use(express.static(path.join(__dirname, "../../frontend/public")));
 app.use(express.urlencoded({ extended: true }));
-
-app.use(express.static(
-    path.join(__dirname,"../../frontend")
-));
-
-
-app.post('/envio', (req: Request, res: Response) => {
-    const resultado = req.body.time;
-    console.log(resultado);
-
-    const [hora, minuto] = resultado.split(":");
-
-    arduino.setTimeList(hora, minuto);
-
-    res.sendFile(
-        path.join(__dirname, "../../frontend/mesage.html")
-    );
-
-})
+app.use(router);
 
 app.listen(port, () => {
     console.log("porta rodando");
