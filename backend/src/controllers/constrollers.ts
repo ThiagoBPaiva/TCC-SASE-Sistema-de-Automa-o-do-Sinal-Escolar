@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import path from "path";
-import { ArduinoConexion } from "../communication"
 // ---
-import { loginUser, signUpUser } from '../validation/ValidationControllers'
+import { ArduinoConexion } from "../communication"
+import { UserService } from "../service/UserService"
 
 
 /**
@@ -10,6 +10,7 @@ import { loginUser, signUpUser } from '../validation/ValidationControllers'
  */
 export class Controllers {
     // private arduino = new ArduinoConexion();
+    private userService = new UserService();
     constructor () {}
 
     /**
@@ -28,25 +29,35 @@ export class Controllers {
     }
 
     public async postLogin(req: Request, res: Response): Promise<void> {
-        const {user, password} = req.body;
+        const {email, password} = req.body;
 
-        const validationResult = loginUser.safeParse({ user: user, password: password });
-        if (!validationResult.success) {
-            res.status(400).send({ message: "Erro! Dados invalidos, por favor digite os dados corretamente" });
+        const resultService = await this.userService.loginUserService(email, password);
+        console.log(resultService);
+
+        if (resultService === 'Login') {
+            res.status(200).send({email: email, password: password, login: "Ok"});
+        } else {
+            res.status(400).send({ error: resultService });
         }
-
-        res.status(200).send({user: user, password: password, login: "Ok"});
     }
 
-    async postSignUp(req: Request, res: Response) {
+    async postSignUp(req: Request, res: Response): Promise<void> {
         const { user, email, password } = req.body;
 
-        const validadtionResult = signUpUser.safeParse({ user: user, password: password, email: email });
-        if (!validadtionResult.success) {
-            res.status(400).send({ message: "Erro! Dados invalidos, por favor digite os dados corretamente" });
+        const resultService = await this.userService.createNewUserService(user, password, email);
+
+        if (resultService === 'User create') {
+            res.status(201).json({ message: "Cadastro feito com sucesso" });
+        } else {
+            res.status(400).send({ error: resultService });
         }
 
-        return res.status(201).json({
+        // const validadtionResult = signUpUser.safeParse({ user: user, password: password, email: email });
+        // if (!validadtionResult.success) {
+        //     res.status(400).send({ message: "Erro! Dados invalidos, por favor digite os dados corretamente" });
+        // }
+
+        res.status(201).json({
             message: "Cadastro feito com sucesso"
         });
     }

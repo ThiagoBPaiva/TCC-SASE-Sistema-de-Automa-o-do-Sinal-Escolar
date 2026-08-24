@@ -11,7 +11,7 @@ router.get("/login", controller.getLogin.bind(controller)); // exibir tela de lo
 router.get("/signUp", controller.getSignUp.bind(controller)); // exibir tea de cadastro
 
 // Já esses aqui, são subordinados aos get's, onde para cada interassão cliente -> servidor, esses aqui serão os responsáveis
-router.post("/login", controller.postLogin.bind(controller)); // Logou na conta
-router.post("/signUp", controller.postSignUp.bind(controller)); // Criou a conta
+router.post("/auth/login", controller.postLogin.bind(controller)); // Logou na conta
+router.post("/auth/signUp", controller.postSignUp.bind(controller)); // Criou a conta
 
 // router.post("/home", controller.postLogin.bind(controller));
