@@ -24,7 +24,7 @@
             </div>
 
             <!-- Formulário -->
-            <form class="login-form" method="post" action="/envio">
+            <form id="formLogin" class="login-form" method="get">
                 <div class="input-group">
                     <label for="Email">Email:</label>
                     <input
@@ -46,10 +46,6 @@
                     >
                 </div>
 
-                <a href="/signUp" class="forgot-sign-up">
-                    Ainda não tenho uma conta
-                </a>
-
                 <button type="submit">
                     Entrar
                 </button>
@@ -60,5 +56,7 @@
             </form>
         </div>
     </main>
+
+    <script src="../script/loginHome.js"></script>
 </body>
 </html>

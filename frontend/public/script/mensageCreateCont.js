@@ -22,7 +22,7 @@ async function cadastrarUsuario(event) {
     const password = document.querySelector("#senha").value;
 
     try {
-        const response = await fetch("/signUp", {
+        const response = await fetch("/auth/signUp", {
             method: "POST",
 
             headers: {
