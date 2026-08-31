@@ -1,4 +1,4 @@
-import express, { Request, Response } from "express";
+import { Request, Response } from "express";
 import path from "path";
 // ---
 import { ArduinoConexion } from "../communication"
@@ -22,44 +22,20 @@ export class Controllers {
         );
     }
 
-    public async getSignUp(req: Request, res: Response): Promise<void> {
-        res.sendFile(
-            path.join(__dirname, "../../../frontend/public/pages/signUp.html")
-        )
-    }
-
     public async postLogin(req: Request, res: Response): Promise<void> {
         const {email, password} = req.body;
 
         const resultService = await this.userService.loginUserService(email, password);
-        console.log(resultService);
-
-        if (resultService === 'Login') {
-            res.status(200).send({email: email, password: password, login: "Ok"});
-        } else {
-            res.status(400).send({ error: resultService });
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(resultService.error);
         }
-    }
-
-    async postSignUp(req: Request, res: Response): Promise<void> {
-        const { user, email, password } = req.body;
-
-        const resultService = await this.userService.createNewUserService(user, password, email);
-
-        if (resultService === 'User create') {
-            res.status(201).json({ message: "Cadastro feito com sucesso" });
-        } else {
-            res.status(400).send({ error: resultService });
-        }
-
-        // const validadtionResult = signUpUser.safeParse({ user: user, password: password, email: email });
-        // if (!validadtionResult.success) {
-        //     res.status(400).send({ message: "Erro! Dados invalidos, por favor digite os dados corretamente" });
-        // }
-
-        res.status(201).json({
-            message: "Cadastro feito com sucesso"
-        });
+        res.cookie("token", resultService.token, {
+            maxAge: 360000,
+            httpOnly: true,
+            secure: false,
+            sameSite: "strict"
+        })
+        res.status(200).json({email, token: resultService.token});
     }
 
     /**

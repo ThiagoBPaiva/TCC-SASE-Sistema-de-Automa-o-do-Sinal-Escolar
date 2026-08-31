@@ -1,5 +1,9 @@
 use SASE;
 
+show tables;
+
+select * from Usuarios;
+
 /*CREATE TABLE Usuario (
     id VARCHAR(26) PRIMARY KEY,
     username VARCHAR(155) NOT NULL,

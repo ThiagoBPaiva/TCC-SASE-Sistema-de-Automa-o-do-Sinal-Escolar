@@ -1,46 +1,24 @@
 import { Communication } from '../config/communication';
 import { User } from '../entites/User';
 import { encryptingPassword, decryptPassword } from '../utils/hashPassword'
+import { returnFunction } from '../interfaces/interfaceService'
+
+import { sign } from "jsonwebtoken" // Gerar o Token
 
 import { z } from 'zod';
 
-export const loginUser = z.object({
+const loginUser = z.object({
     email: z.email(),
     password: z.string().min(6)
-})
-
-export const signUpUser = z.object({
-    user: z.string().min(2),
-    password: z.string().min(6),
-    email: z.email()
 })
 
 
 export class UserService {
     private communicatrion = new Communication();
+    private JWT_TOKEN = process.env.SECRET!;
     constructor() {}
 
-    public async createNewUserService(user: string, password: string, email: string): Promise<string> {
-        try {
-            const validation = signUpUser.safeParse({ user: user, password: password, email: email });
-
-            if (!validation.success) {
-                throw new Error('Erro! Dados invalidos, por favor digite os dados corretamente');
-            }
-
-            // Criptografando a senha
-            const hashPassword = await encryptingPassword(password);
-            const newUser = new User(user, email, hashPassword);
-
-            this.communicatrion.insertNewUser(newUser);
-
-            return "User create";
-        } catch (error) {
-            throw new Error(`System error: ${error}`);
-        }
-    }
-
-    public async loginUserService(email: string, password: string): Promise<string> {
+    public async loginUserService(email: string, password: string): Promise<returnFunction> {
         try {
 
             const validationLoginUser = loginUser.safeParse({ email: email, password: password });
@@ -55,9 +33,13 @@ export class UserService {
                 throw new Error("Erro, senha ou email invalida.");
             }
 
-            return "Login";
+            // criação do token
+            const token = sign({ id: validationEmailUser![0].id }, this.JWT_TOKEN, { expiresIn: "30s" });
+
+            return {code: 200, token: token};
         } catch (error) {
-            throw new Error(`System error: ${error}`);
+            return {code: 501, error: 'System Error in Login User'};
+            // throw new Error(`System error: ${error}`);
         }
     }
 }

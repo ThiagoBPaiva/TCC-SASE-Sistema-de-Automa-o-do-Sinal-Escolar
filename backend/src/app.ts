@@ -1,4 +1,5 @@
 import express from "express";
+import cookieParser from "cookie-parser";
 import path from "path";
 import * as dotenv from "dotenv";
 // ---
@@ -13,6 +14,7 @@ const app = express();
 const port: number = Number(process.env.PORT);
 
 app.use(express.json());
+app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "../../frontend/public")));
 app.use(express.urlencoded({ extended: true }));
 app.use(router);
