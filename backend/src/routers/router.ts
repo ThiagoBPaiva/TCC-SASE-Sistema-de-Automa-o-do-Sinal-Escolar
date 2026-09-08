@@ -20,10 +20,12 @@ router.post("/auth/login", controller.postLogin.bind(controller)); // Logou na c
 // -------------- ROTAS DOS AUTENTICADOS --------------
 
 // Rota para autenticados
-router.get("/auth/home", AsyncMiddlwares, auth.homePage)
+router.get("/auth/home", AsyncMiddlwares, auth.homePage.bind(auth))
 
 // Criação de novos usuarios
-router.get("/signUp", AsyncMiddlwares, auth.getSignUp); // exibir tela de cadastro
-router.post("/auth/signUp", AsyncMiddlwares, auth.postSignUp); // Criou a conta
+router.get("/signUp", AsyncMiddlwares, auth.getSignUp.bind(auth)); // exibir tela de cadastro
+router.post("/auth/signUp", AsyncMiddlwares, auth.postSignUp.bind(auth)); // Criou a conta
 
+// Criação de novos grupos
+router.post("/auth/createGroup", AsyncMiddlwares, auth.postCreateGroupTime.bind(auth));
 

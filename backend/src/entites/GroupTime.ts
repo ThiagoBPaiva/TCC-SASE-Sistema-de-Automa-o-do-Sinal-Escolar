@@ -1,13 +1,10 @@
-enum activity {
-    on='on',
-    off='off'
-}
+import { Activity } from "../utils/enum/Activity";
 
 export class GroupTime {
     constructor(
         private groupName: string,
-        private activity: activity
-    ) {}
+        private activity: Activity
+    ) { }
 
     public getNameGroup(): string {
         return this.groupName;
@@ -21,7 +18,7 @@ export class GroupTime {
         this.groupName = groupName;
     }
 
-    public setActivity(activity: activity): void {
+    public setActivity(activity: Activity): void {
         this.activity = activity;
     }
 }

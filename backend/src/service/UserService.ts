@@ -16,13 +16,13 @@ const loginUser = z.object({
 export class UserService {
     private communicatrion = new Communication();
     private JWT_TOKEN = process.env.SECRET!;
-    constructor() {}
+    constructor() { }
 
     public async loginUserService(email: string, password: string): Promise<returnFunction> {
         try {
 
             const validationLoginUser = loginUser.safeParse({ email: email, password: password });
-            const validationEmailUser = await this.communicatrion.getDateUser(email);
+            const validationEmailUser = await this.communicatrion.DBGetDateUser(email);
 
             if (!validationLoginUser.success) {
                 throw new Error('Erro! Dados invalidos, por favor digite os dados corretamente');
@@ -34,11 +34,11 @@ export class UserService {
             }
 
             // criação do token
-            const token = sign({ id: validationEmailUser![0].id }, this.JWT_TOKEN, { expiresIn: "30s" });
+            const token = sign({ id: validationEmailUser![0].id }, this.JWT_TOKEN, { expiresIn: "120s" });
 
-            return {code: 200, token: token};
+            return { code: 200, token: token };
         } catch (error) {
-            return {code: 501, error: 'System Error in Login User'};
+            return { code: 501, error: 'System Error in Login User' };
             // throw new Error(`System error: ${error}`);
         }
     }

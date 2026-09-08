@@ -5,8 +5,10 @@ import { AuthUserService } from "../service/AuthUserService"
 
 
 export class AuthConstrollers {
-    private authUserService = new AuthUserService();
-    constructor(){}
+    private authUserService: AuthUserService;
+    constructor() {
+        this.authUserService = new AuthUserService();
+    }
 
     public async homePage(req: Request, res: Response): Promise<void> {
         res.status(200).sendFile(
@@ -32,7 +34,21 @@ export class AuthConstrollers {
             );
         }
         res.status(resultService.code).send(
-              resultService.message
+            resultService.message
+        );
+    }
+
+    async postCreateGroupTime(req: Request, res: Response): Promise<void> {
+        const { nameGroup } = req.body;
+
+        const resultService = await this.authUserService.createNewGroupTime(nameGroup);
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+        }
+        res.status(resultService.code).send(
+            resultService.message
         );
     }
 }
