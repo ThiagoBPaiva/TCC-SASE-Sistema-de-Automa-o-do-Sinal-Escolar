@@ -32,6 +32,7 @@ export class AuthConstrollers {
             res.status(resultService.code).send(
                 resultService.error
             );
+            return
         }
         res.status(resultService.code).send(
             resultService.message
@@ -46,9 +47,31 @@ export class AuthConstrollers {
             res.status(resultService.code).send(
                 resultService.error
             )
+            return
         }
         res.status(resultService.code).send(
             resultService.message
         );
+    }
+
+    async postCreateTime(req: Request, res: Response): Promise<void> {
+        const { idGroup, time } = req.body;
+
+        const resultService = await this.authUserService.createNewTime(idGroup, time);
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
+        res.status(resultService.code).send(
+            resultService.message
+        )
+    }
+
+    async postUpdatGroupTimeeActivity(req: Request, res: Response): Promise<void> {
+        const { groupName, activity } = req.body;
+
+
     }
 }

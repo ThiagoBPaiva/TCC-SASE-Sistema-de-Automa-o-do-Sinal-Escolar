@@ -2,7 +2,7 @@ use SASE;
 
 show tables;
 
-select * from Usuarios;
+select * from Horarios;
 
 /*CREATE TABLE Usuario (
     id VARCHAR(26) PRIMARY KEY,
@@ -17,8 +17,9 @@ CREATE TABLE Grupo_de_Horarios (
     activity ENUM('on', 'off') NOT NULL
 );
 
+
 CREATE TABLE Horarios (
-    id INT PRIMARY KEY,
+    id VARCHAR(26) PRIMARY KEY,
     id_group VARCHAR(26) NOT NULL,
     time VARCHAR(5) NOT NULL,
 
@@ -26,17 +27,4 @@ CREATE TABLE Horarios (
         REFERENCES Grupo_de_Horarios(id)
 );
 
-CREATE TABLE Relatorios (
-    id VARCHAR(26) PRIMARY KEY,
-    Grupo_de_Horarios_id VARCHAR(26) NOT NULL,
-    Usuario_id VARCHAR(26) NOT NULL,
-    alteration ENUM('create', 'update', 'delete') NOT NULL,
-    description VARCHAR(255),
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-
-    FOREIGN KEY (Grupo_de_Horarios_id)
-        REFERENCES Grupo_de_Horarios(id),
-
-    FOREIGN KEY (Usuario_id)
-        REFERENCES Usuario(id)
-);*/
+*/

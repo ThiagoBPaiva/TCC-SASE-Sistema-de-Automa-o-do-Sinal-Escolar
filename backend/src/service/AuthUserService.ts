@@ -22,8 +22,13 @@ const validationGroupTime = z.object({
 })
 
 const validationTime = z.object({
-    id: z.uuid(),
-    time: z.string().min(5)
+    id: z.string(),
+    time: z.string().min(3).max(5)
+})
+
+const validationActivity = z.object({
+    name: z.string().min(3),
+    activity: z.enum(['on', 'off'])
 })
 
 export class AuthUserService extends Communication {
@@ -36,7 +41,7 @@ export class AuthUserService extends Communication {
                 throw new Error('Erro! Dados invalidos, por favor digite os dados corretamente');
             }
             if (userExisting.length > 0) {
-                return { code: 501, error: 'Usuario já cadastrado.' }
+                return { code: 501, error: 'Usuario já cadastrado.' };
             }
 
             // Criptografando a senha
@@ -66,17 +71,42 @@ export class AuthUserService extends Communication {
 
             this.DBCreteaNewGroupTime(newGroup);
 
-            return { code: 201, message: 'Group create' }
+            return { code: 201, message: 'Group create' };
         } catch (error) {
-            return { code: 501, error: `${error}` }
+            return { code: 501, error: `${error}` };
         }
+    }
+
+    public async activityGroupTime(groupName: string, activity: string): Promise<returnFunction> {
+        const validation = validationActivity.safeParse({ name: groupName, activity: activity });
+        const groupExisting = await this.DBGetValues(Tablas.grupoDeHorarios, 'groupName', groupName);
+
+        if (!validation.success) {
+            return { code: 400, error: "Requisição negada, preenche as informações de forma correta!" };
+        } if (groupExisting.length <= 0) {
+            return { code: 404, error: "Grupo não encontrado" };
+        }
+
+        await this.DBActivityUpdate(groupName, activity);
+
+        return { code: 200, message: `Group ${activity}` };
     }
 
     public async createNewTime(idGroup: string, time: string): Promise<returnFunction> {
         try {
-            const validation = validationTime.safeParse({ id: idGroup, time: time });
+            const newDate = new Date();
+            const [hora, minute] = time.split(":")
+            newDate.setHours(
+                Number(hora),
+                Number(minute),
+                0,
+                0
+            )
+            const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`
+
+            const validation = validationTime.safeParse({ id: idGroup, time: horarioArual });
             const timeExisti = await this.DBGetValues(Tablas.horarios, 'id_group', idGroup);
-            const groupTimeExisti = await this.DBGetValues(Tablas.horarios, 'id', idGroup);
+            const groupTimeExisti = await this.DBGetValues(Tablas.grupoDeHorarios, 'id', idGroup);
 
             if (!validation.success) {
                 return { code: 400, error: "Horário invalido, digite o horário da forma solicitada" };
@@ -86,7 +116,8 @@ export class AuthUserService extends Communication {
                 return { code: 406, error: "Grupo de horário inexistente, por favor, digite-o corretamente" };
             }
 
-            const newTime = new Time(idGroup, time);
+            const newTime = new Time(horarioArual, idGroup);
+            console.log(newTime.getGroup(), newTime.getTime());
             this.DBCreateNewTime(newTime)
 
             return { code: 201, message: 'Time create' }

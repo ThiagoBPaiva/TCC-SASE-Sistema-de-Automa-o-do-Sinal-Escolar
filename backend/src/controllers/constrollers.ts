@@ -11,7 +11,7 @@ import { UserService } from "../service/UserService"
 export class Controllers {
     // private arduino = new ArduinoConexion();
     private userService = new UserService();
-    constructor () {}
+    constructor() { }
 
     /**
      * Método responsável por criar a rota de formulário para o cadastro de horários.
@@ -23,11 +23,12 @@ export class Controllers {
     }
 
     public async postLogin(req: Request, res: Response): Promise<void> {
-        const {email, password} = req.body;
+        const { email, password } = req.body;
 
         const resultService = await this.userService.loginUserService(email, password);
         if (resultService.code !== 200) {
             res.status(resultService.code).send(resultService.error);
+            return
         }
         res.cookie("token", resultService.token, {
             maxAge: 360000,
@@ -35,7 +36,7 @@ export class Controllers {
             secure: false,
             sameSite: "strict"
         })
-        res.status(200).json({email, token: resultService.token});
+        res.status(200).json({ email, token: resultService.token });
     }
 
     /**

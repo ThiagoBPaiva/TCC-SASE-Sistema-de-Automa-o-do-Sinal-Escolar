@@ -28,4 +28,6 @@ router.post("/auth/signUp", AsyncMiddlwares, auth.postSignUp.bind(auth)); // Cri
 
 // Criação de novos grupos
 router.post("/auth/createGroup", AsyncMiddlwares, auth.postCreateGroupTime.bind(auth));
+// Criação de um novo horário
+router.post("/auth/createTime", AsyncMiddlwares, auth.postCreateTime.bind(auth));
 
