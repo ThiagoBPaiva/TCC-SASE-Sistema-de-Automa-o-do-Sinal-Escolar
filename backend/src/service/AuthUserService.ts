@@ -6,10 +6,11 @@ import { Time } from '../entites/Time';
 import { encryptingPassword, decryptPassword } from '../utils/hashPassword'
 import { returnFunction } from '../interfaces/interfaceService'
 
-import { Tablas } from "../utils/enum/Tables"
+import { Tables } from "../utils/enum/Tables"
 import { Activity } from "../utils/enum/Activity";
 
 import { z } from 'zod'
+import { RowDataPacket } from 'mysql2';
 
 const validationSignUser = z.object({
     user: z.string().min(2),
@@ -41,7 +42,7 @@ export class AuthUserService extends Communication {
                 throw new Error('Erro! Dados invalidos, por favor digite os dados corretamente');
             }
             if (userExisting.length > 0) {
-                return { code: 501, error: 'Usuario já cadastrado.' };
+                return { code: 500, error: 'Usuario já cadastrado.' };
             }
 
             // Criptografando a senha
@@ -52,14 +53,14 @@ export class AuthUserService extends Communication {
 
             return { code: 201, message: 'User Created.' };
         } catch (error) {
-            return { code: 501, error: 'Create User error.' };
+            return { code: 500, error: 'Create User error.' };
         }
     }
 
     public async createNewGroupTime(groupName: string): Promise<returnFunction> {
         try {
             const validation = validationGroupTime.safeParse({ groupTimeName: groupName });
-            const nameExistin = await this.DBGetValues(Tablas.grupoDeHorarios, 'groupName', groupName);
+            const nameExistin = await this.DBGetValues(Tables.grupoDeHorarios, 'groupName', groupName);
 
             if (!validation.success) {
                 return { code: 400, error: "Nome do grupo invalido ou insuficiente" };
@@ -73,40 +74,49 @@ export class AuthUserService extends Communication {
 
             return { code: 201, message: 'Group create' };
         } catch (error) {
-            return { code: 501, error: `${error}` };
+            return { code: 500, error: `${error}` };
         }
     }
 
     public async activityGroupTime(groupName: string, activity: string): Promise<returnFunction> {
-        const validation = validationActivity.safeParse({ name: groupName, activity: activity });
-        const groupExisting = await this.DBGetValues(Tablas.grupoDeHorarios, 'groupName', groupName);
+        try {
+            const validation = validationActivity.safeParse({ name: groupName, activity: activity });
+            console.log(groupName, activity)
+            const groupExisting = await this.DBGetValues(Tables.grupoDeHorarios, 'groupName', groupName);
 
-        if (!validation.success) {
-            return { code: 400, error: "Requisição negada, preenche as informações de forma correta!" };
-        } if (groupExisting.length <= 0) {
-            return { code: 404, error: "Grupo não encontrado" };
+            if (!validation.success) {
+                return { code: 400, error: "Requisição negada, preenche as informações de forma correta!" };
+            } if (groupExisting.length <= 0) {
+                return { code: 404, error: "Grupo não encontrado" };
+            } if (activity === 'on') {
+                const vaidationGroupsStatus = await this.DBGetValues(Tables.grupoDeHorarios, 'activity', activity);
+
+                if (vaidationGroupsStatus.length > 0) return { code: 403, error: "Já tem um grupo de horários acionado" }
+            }
+
+            await this.DBActivityUpdate(groupName, activity);
+
+            return { code: 200, message: `Group ${activity}` };
+        } catch (error) {
+            return { code: 500, error: `${error}` };
         }
-
-        await this.DBActivityUpdate(groupName, activity);
-
-        return { code: 200, message: `Group ${activity}` };
     }
 
     public async createNewTime(idGroup: string, time: string): Promise<returnFunction> {
         try {
             const newDate = new Date();
-            const [hora, minute] = time.split(":")
+            const [hora, minute] = time.split(":");
             newDate.setHours(
                 Number(hora),
                 Number(minute),
                 0,
                 0
-            )
-            const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`
+            );
+            const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`;
 
             const validation = validationTime.safeParse({ id: idGroup, time: horarioArual });
-            const timeExisti = await this.DBGetValues(Tablas.horarios, 'id_group', idGroup);
-            const groupTimeExisti = await this.DBGetValues(Tablas.grupoDeHorarios, 'id', idGroup);
+            const timeExisti = await this.DBGetValues(Tables.horarios, 'id_group', idGroup);
+            const groupTimeExisti = await this.DBGetValues(Tables.grupoDeHorarios, 'id', idGroup);
 
             if (!validation.success) {
                 return { code: 400, error: "Horário invalido, digite o horário da forma solicitada" };
@@ -118,11 +128,31 @@ export class AuthUserService extends Communication {
 
             const newTime = new Time(horarioArual, idGroup);
             console.log(newTime.getGroup(), newTime.getTime());
-            this.DBCreateNewTime(newTime)
+            this.DBCreateNewTime(newTime);
 
-            return { code: 201, message: 'Time create' }
+            return { code: 201, message: 'Time create' };
         } catch (error) {
-            return { code: 501, error: `${error}` }
+            return { code: 500, error: `${error}` };
+        }
+    }
+
+    public async getAllGroupTime(): Promise<returnFunction> {
+        try {
+            const getAllInfo = await this.DBGetAll(Tables.grupoDeHorarios);
+
+            return { code: 200, group: getAllInfo }
+        } catch (error) {
+            return { code: 500, error: "Erro ao encontrar os grupos de horários" }
+        }
+    }
+
+    public async getActivvvityGroup(): Promise<returnFunction> {
+        try {
+            const getActivityInfo = await this.DBGetValues(Tables.grupoDeHorarios, 'activity', 'on');
+
+            return { code: 200, group: getActivityInfo };
+        } catch (error) {
+            return { code: 500, error: "Erro ao encontrar o grupo de horário ativo" }
         }
     }
 }

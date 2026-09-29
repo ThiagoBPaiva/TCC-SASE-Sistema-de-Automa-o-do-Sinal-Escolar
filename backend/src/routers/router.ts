@@ -30,4 +30,7 @@ router.post("/auth/signUp", AsyncMiddlwares, auth.postSignUp.bind(auth)); // Cri
 router.post("/auth/createGroup", AsyncMiddlwares, auth.postCreateGroupTime.bind(auth));
 // Criação de um novo horário
 router.post("/auth/createTime", AsyncMiddlwares, auth.postCreateTime.bind(auth));
-
+// Atualizar o status de acionamento
+router.post("/auth/update/activityTime", AsyncMiddlwares, auth.postUpdatGroupTimeeActivity.bind(auth));
+// Mostrando todos os grupos de horários
+router.get("/auth/allTime", AsyncMiddlwares, auth.getAllGroupTime.bind(auth));

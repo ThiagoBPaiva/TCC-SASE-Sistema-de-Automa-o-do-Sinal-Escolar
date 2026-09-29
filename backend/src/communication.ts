@@ -33,6 +33,7 @@ export class ArduinoConexion {
         }, 1000);
     }
 
+    // esse método foi realocado a classe de Regras de Negocios ./AuthUserService.ts
     setTimeList(hora: string, minuto: string): void {
         const newDate = new Date();
 
@@ -44,7 +45,7 @@ export class ArduinoConexion {
         )
 
         console.log(newDate);
-        const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`
+        const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`;
         this.horarios.push(horarioArual);
     }
 
@@ -52,10 +53,12 @@ export class ArduinoConexion {
     setDateInArduino(): void {
         const agora = new Date();
         const horarioAtual = `${agora.getHours()}:${agora.getMinutes()}`;
+
         console.log("teste");
         console.log(horarioAtual);
         console.log(this.horarios);
-        if(this.horarios.includes(horarioAtual) && !this.ultimoSinal.includes(horarioAtual)){
+
+        if (this.horarios.includes(horarioAtual) && !this.ultimoSinal.includes(horarioAtual)) {
             console.log("Enviando sinal");
             this.arduino.write("LIGADO\n");
             this.ultimoSinal.push(horarioAtual);

@@ -72,6 +72,30 @@ export class AuthConstrollers {
     async postUpdatGroupTimeeActivity(req: Request, res: Response): Promise<void> {
         const { groupName, activity } = req.body;
 
+        const resultService = await this.authUserService.activityGroupTime(groupName, activity);
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
 
+        res.status(resultService.code).send(
+            resultService.message
+        );
+    }
+
+    async getAllGroupTime(req: Request, res: Response): Promise<void> {
+        const resultService = await this.authUserService.getAllGroupTime();
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
+
+        res.status(resultService.code).json(
+            resultService.group
+        );
     }
 }

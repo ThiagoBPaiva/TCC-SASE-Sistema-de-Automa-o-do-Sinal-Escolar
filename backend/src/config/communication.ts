@@ -4,7 +4,7 @@ import { RowDataPacket, ResultSetHeader } from 'mysql2'
 import { User } from "../entites/User";
 import { GroupTime } from "../entites/GroupTime";
 import { Time } from "../entites/Time";
-import { Tablas } from "../utils/enum/Tables"
+import { Tables } from "../utils/enum/Tables"
 
 import { ulid } from "ulid"
 
@@ -17,7 +17,19 @@ export class Communication {
     // -------------------- Pesquisa universal ---------------------
     //--------------------------------------------------------------
 
-    protected async DBGetValues(table: Tablas, coluns: string, value: string): Promise<RowDataPacket[]> {
+    protected async DBGetAll(table: Tables): Promise<RowDataPacket[]>{
+        try {
+            const codeDb: string = `SELECT * FROM ${table}`;
+
+            const [rows] = await partDataBase.execute<RowDataPacket[]>(codeDb);
+
+            return rows;
+        } catch (error) {
+            throw new Error(`Erro ao encontrar a informação pedida: ${error}`);
+        }
+    }
+    
+    protected async DBGetValues(table: Tables, coluns: string, value: string): Promise<RowDataPacket[]> {
         try {
             const codeDb: string = `SELECT * FROM ${table} WHERE ${coluns} = ?`;
 
