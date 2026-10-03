@@ -34,7 +34,8 @@ export class UserService {
             }
 
             // criação do token
-            const token = sign({ id: validationEmailUser![0].id }, this.JWT_TOKEN, { expiresIn: "120s" });
+            // Token com duração de meia hora.
+            const token = sign({ id: validationEmailUser![0].id }, this.JWT_TOKEN, { expiresIn: "1800s" });
 
             return { code: 200, token: token };
         } catch (error) {

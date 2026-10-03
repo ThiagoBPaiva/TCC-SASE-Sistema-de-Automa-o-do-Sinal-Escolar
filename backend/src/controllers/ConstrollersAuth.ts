@@ -10,6 +10,10 @@ export class AuthConstrollers {
         this.authUserService = new AuthUserService();
     }
 
+    // PRIVATE METHODES ------------------
+
+    // LAYOUT ----------------------------
+
     public async homePage(req: Request, res: Response): Promise<void> {
         res.status(200).sendFile(
             path.join(__dirname, "../../../frontend/public/pages/home.html")
@@ -87,6 +91,20 @@ export class AuthConstrollers {
 
     async getAllGroupTime(req: Request, res: Response): Promise<void> {
         const resultService = await this.authUserService.getAllGroupTime();
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
+
+        res.status(resultService.code).json(
+            resultService.group
+        );
+    }
+
+    async getActivityGroupTime(req: Request, res: Response): Promise<void> {
+        const resultService = await this.authUserService.getActivvvityGroup();
         if (resultService.code !== 200) {
             res.status(resultService.code).send(
                 resultService.error

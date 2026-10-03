@@ -34,3 +34,5 @@ router.post("/auth/createTime", AsyncMiddlwares, auth.postCreateTime.bind(auth))
 router.post("/auth/update/activityTime", AsyncMiddlwares, auth.postUpdatGroupTimeeActivity.bind(auth));
 // Mostrando todos os grupos de horários
 router.get("/auth/allTime", AsyncMiddlwares, auth.getAllGroupTime.bind(auth));
+// Mostrar horário ativo
+router.get("/auth/timeActivity", AsyncMiddlwares, auth.getActivityGroupTime.bind(auth));
