@@ -9,7 +9,7 @@ import { UserService } from "../service/UserService"
  * Classe responsável pela criação e controle das funcionalidades das rotas
  */
 export class Controllers {
-    // private arduino = new ArduinoConexion();
+    private arduino = new ArduinoConexion();
     private userService = new UserService();
     constructor() { }
 
@@ -36,6 +36,11 @@ export class Controllers {
             secure: false,
             sameSite: "strict"
         })
+
+        console.log('teste')
+        this.arduino.validationPort();
+        this.arduino.onArduino();
+
         res.status(200).json({ email, token: resultService.token });
     }
 

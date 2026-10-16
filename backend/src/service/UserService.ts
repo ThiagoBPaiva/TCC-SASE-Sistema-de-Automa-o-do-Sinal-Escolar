@@ -18,6 +18,7 @@ export class UserService {
     private JWT_TOKEN = process.env.SECRET!;
     constructor() { }
 
+    // Logando o usuário ao sistema
     public async loginUserService(email: string, password: string): Promise<returnFunction> {
         try {
 
