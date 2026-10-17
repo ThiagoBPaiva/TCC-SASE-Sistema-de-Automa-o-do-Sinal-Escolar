@@ -38,8 +38,10 @@ export class Controllers {
         })
 
         console.log('teste')
-        this.arduino.validationPort();
-        this.arduino.onArduino();
+        setInterval(() => {
+            this.arduino.validationPort();
+            this.arduino.onArduino();
+        }, 500);
 
         res.status(200).json({ email, token: resultService.token });
     }

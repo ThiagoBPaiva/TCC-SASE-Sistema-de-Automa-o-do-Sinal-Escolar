@@ -1,20 +1,23 @@
 import { SerialPort } from "serialport";
 import { ReadlineParser } from "@serialport/parser-readline";
+import { Communication } from "./config/communication";
 import readline from "readline";
+import { Tables } from "./utils/enum/Tables";
 
-export class ArduinoConexion {
+export class ArduinoConexion extends Communication {
     private arduino: SerialPort;
     private parser: ReadlineParser;
-    private horarios: Array<string> = []; // Não sera usado
-    private ultimoSinal: Array<string> = []; // Não sera usado
+    private horarios: Array<string> = [];
+    private ultimoSinal: Array<string> = [];
 
     constructor() {
-
+        super()
         // Conexão com a porta Serial USB COM3
         this.arduino = new SerialPort({
             path: "COM3",
             baudRate: 9600
         });
+        this.validationPort();
 
         // Recebendo mensagem do Arduino
         this.parser = this.arduino.pipe(
@@ -40,38 +43,25 @@ export class ArduinoConexion {
         })
     }
 
-
-    // // esse método foi realocado a classe de Regras de Negocios ./AuthUserService.ts
-    // setTimeList(hora: string, minuto: string): void {
-    //     const newDate = new Date();
-
-    //     newDate.setHours(
-    //         Number(hora),
-    //         Number(minuto),
-    //         0,
-    //         0
-    //     )
-
-    //     console.log(newDate);
-    //     const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`;
-    //     this.horarios.push(horarioArual);
-    // }
-
     // date vai receber como valor padrão o formato "XX:ZZ"
-    onArduino(): void {
-        console.log("Enviando sinal");
-        this.arduino.write("LIGADO\n");
-        // const agora = new Date();
-        // const horarioAtual = `${agora.getHours()}:${agora.getMinutes()}`;
+    async onArduino(): Promise<void> {
 
-        // console.log("teste");
-        // console.log(horarioAtual);
-        // console.log(this.horarios);
+        const localTime = new Date(); // Pegando o horário local
+        const dateFormat = `${localTime.getHours()}:${localTime.getMinutes()}`; // Formatar a horá local
 
-        // if (this.horarios.includes(horarioAtual) && !this.ultimoSinal.includes(horarioAtual)) {
-        //     console.log("Enviando sinal");
-        //     this.arduino.write("LIGADO\n");
-        //     this.ultimoSinal.push(horarioAtual);
-        // }
+        const groupActivity = await this.DBGetValues(Tables.grupoDeHorarios, 'activity', 'on'); // Pegando o grupo ativo
+        const timeOfTheActivity = await this.DBGetValues(Tables.horarios, 'id_group', groupActivity[0].id); // Pegando os horários do grupo ativo
+        timeOfTheActivity.forEach((element) => {
+            const time = element.time;
+            if (!this.horarios.includes(time)) {
+                this.horarios.push(time);
+            }
+        })
+
+        if (this.horarios.includes(dateFormat) && !this.ultimoSinal.includes(dateFormat)) {
+            console.log("Enviando sinal");
+            this.arduino.write("LIGADO\n");
+            this.ultimoSinal.push(dateFormat);
+        }
     }
 }

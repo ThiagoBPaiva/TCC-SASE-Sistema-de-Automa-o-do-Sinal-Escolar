@@ -17,7 +17,7 @@ export class Communication {
     // -------------------- Pesquisa universal ---------------------
     //--------------------------------------------------------------
 
-    protected async DBGetAll(table: Tables): Promise<RowDataPacket[]>{
+    protected async DBGetAll(table: Tables): Promise<RowDataPacket[]> {
         try {
             const codeDb: string = `SELECT * FROM ${table}`;
 
@@ -28,7 +28,7 @@ export class Communication {
             throw new Error(`Erro ao encontrar a informação pedida: ${error}`);
         }
     }
-    
+
     protected async DBGetValues(table: Tables, coluns: string, value: string): Promise<RowDataPacket[]> {
         try {
             const codeDb: string = `SELECT * FROM ${table} WHERE ${coluns} = ?`;
@@ -49,7 +49,7 @@ export class Communication {
     public async DBInsertNewUser(user: User): Promise<ResultSetHeader> {
         try {
             const codeDb: string = "INSERT INTO Usuarios (id, username, email, password_hash) VALUES (?, ?, ?, ?)"
-            const valeus: Array<string> = [this.id, user.getName(), user.getEmail(), user.getPassword()];
+            const valeus: Array<string> = [ulid(), user.getName(), user.getEmail(), user.getPassword()];
 
             const [rows] = await partDataBase.execute<ResultSetHeader>(codeDb, valeus);
 
@@ -94,7 +94,7 @@ export class Communication {
     public async DBCreteaNewGroupTime(group: GroupTime): Promise<ResultSetHeader> {
         try {
             const codeDb: string = "INSERT INTO Grupo_de_Horarios (id, groupName, activity) VALUES (?, ?, ?)";
-            const result: Array<string> = [this.id, group.getNameGroup(), group.getActivity()];
+            const result: Array<string> = [ulid(), group.getNameGroup(), group.getActivity()];
 
             const [rows] = await partDataBase.execute<ResultSetHeader>(codeDb, result);
 
@@ -136,7 +136,7 @@ export class Communication {
     public async DBCreateNewTime(time: Time): Promise<ResultSetHeader> {
         try {
             const codeDb: string = "INSERT INTO Horarios (id, id_group, time) VALUES (?, ?, ?)";
-            const values: Array<string> = [this.id, time.getGroup(), time.getTime()];
+            const values: Array<string> = [ulid(), time.getGroup(), time.getTime()];
 
             const [rows] = await partDataBase.execute<ResultSetHeader>(codeDb, values);
 

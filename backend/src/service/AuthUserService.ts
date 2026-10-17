@@ -115,7 +115,7 @@ export class AuthUserService extends Communication {
             const horarioArual = `${newDate.getHours()}:${newDate.getMinutes()}`;
 
             const validation = validationTime.safeParse({ id: idGroup, time: horarioArual });
-            const timeExisti = await this.DBGetValues(Tables.horarios, 'id_group', idGroup);
+            const timeExisti = await this.DBGetValues(Tables.horarios, 'time', horarioArual);
             const groupTimeExisti = await this.DBGetValues(Tables.grupoDeHorarios, 'id', idGroup);
 
             if (!validation.success) {
