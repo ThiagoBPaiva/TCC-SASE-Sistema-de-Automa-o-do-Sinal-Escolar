@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Novo Horário | SASE</title>
+
+    <link rel="stylesheet" href="../style/createTime.css">
+    <script src="../script/createTime.js" defer></script>
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <aside class="sidebar">
+            <a href="home.html" class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                    aria-hidden="true">
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+                    <path d="M10 21h4" />
+                </svg>
+
+                <div class="brand-text">
+                    <strong>SASE</strong>
+                    <span>Sistema de Automação<br>de Sinal Escolar</span>
+                </div>
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Navegação principal">
+                <a href="/auth/home" class="nav-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <path d="m3 10 9-7 9 7" />
+                        <path d="M5 9v11h14V9M9 20v-7h6v7" />
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="/auth/groupTime" class="nav-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <rect x="4" y="5" width="16" height="16" rx="2" />
+                        <path d="M8 3v4M16 3v4M4 10h16" />
+                    </svg>
+                    <span>Grupos de Horários</span>
+                </a>
+
+                <a href="/auth/createTime" class="nav-item active" aria-current="page">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
+                    </svg>
+                    <span>Horários</span>
+                </a>
+
+                <a href="" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="m8 12 3 3 5-6"></path>
+                    </svg>
+                    <span>Ativação de grupos</span>
+                </a>
+
+                <a href="usuarios.html" class="nav-item">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="9" cy="8" r="3" />
+                        <path d="M3 20v-2a6 6 0 0 1 12 0v2" />
+                        <path d="M16 5a3 3 0 0 1 0 6M18 14a5 5 0 0 1 3 4v2" />
+                    </svg>
+                    <span>Usuários</span>
+                </a>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Sistema Online</span>
+                </div>
+                <small>v1.0.0</small>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="topbar">
+                <div class="topbar-spacer"></div>
+
+                <button class="profile-button" type="button">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4" />
+                        <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+                    </svg>
+                    <span>Administrador</span>
+                    <span class="chevron">⌄</span>
+                </button>
+            </header>
+
+            <section class="page-content">
+                <a href="/auth/home" class="back-link">
+                    <span aria-hidden="true">←</span>
+                    Voltar
+                </a>
+
+                <h1>Novo Horário</h1>
+
+                <form id="schedule-form" novalidate>
+                    <div class="form-field">
+                        <label for="group-id">Grupo de horários</label>
+
+                        <select id="group-id" name="groupId" required>
+                        </select>
+
+                        <p id="group-error" class="field-error" role="alert" hidden></p>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="schedule-time">Horário</label>
+
+                        <input type="time" id="schedule-time" name="time" value="07:00" required>
+
+                        <p id="time-error" class="field-error" role="alert" hidden></p>
+                    </div>
+
+                    <div id="form-feedback" class="form-feedback" role="status" hidden></div>
+
+                    <div class="form-actions">
+                        <button type="button" id="cancel-button" class="button button-secondary">
+                            Cancelar
+                        </button>
+
+                        <button type="submit" class="button button-primary">
+                            Salvar
+                        </button>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

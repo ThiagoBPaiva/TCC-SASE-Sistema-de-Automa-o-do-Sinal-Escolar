@@ -1,0 +1,668 @@
+/* =========================================================
+   SASE — Sistema de Automação do Sinal Escolar
+   Tela: Visualização dos Grupos de Horários
+   Dimensões padronizadas com home.css
+   ========================================================= */
+
+/* ---------- Variáveis globais ---------- */
+
+:root {
+    --green: #28bd78;
+    --green-dark: #0caf68;
+    --green-soft: #def7e9;
+
+    --sidebar-bg: #092f20;
+    --sidebar-hover: #12442f;
+
+    --page-bg: #f2f5fa;
+    --surface: #ffffff;
+
+    --text-primary: #253b5b;
+    --text-secondary: #7b8eaa;
+
+    --border: #dce4ee;
+
+    --primary-blue: #2878f9;
+
+    --font-family: Arial, Helvetica, sans-serif;
+
+    --sidebar-width: 200px;
+    --content-padding: 22px;
+}
+
+/* ---------- Reset ---------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-width: 320px;
+    min-height: 100%;
+    font-family: var(--font-family);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ---------- Estrutura principal ---------- */
+
+.app-layout {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--page-bg);
+}
+
+/* ---------- Barra lateral ---------- */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex: 0 0 var(--sidebar-width);
+    flex-direction: column;
+
+    width: var(--sidebar-width);
+    height: 100vh;
+    min-height: 420px;
+
+    padding: 16px 10px 12px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background: var(--sidebar-bg);
+    color: #ffffff;
+}
+
+/* Marca SASE */
+
+.brand {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    width: 100%;
+    padding: 0 5px 28px;
+
+    color: #ffffff;
+}
+
+.brand-icon {
+    flex: 0 0 23px;
+    width: 23px;
+    height: 23px;
+    margin-top: 1px;
+    color: #d7e9e0;
+}
+
+.brand-text {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    gap: 0;
+}
+
+.brand-text strong {
+    margin-bottom: 2px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+
+.brand-text span {
+    color: #d1e0d8;
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+/* ---------- Navegação ---------- */
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 36px;
+    width: 100%;
+    padding: 9px 10px;
+
+    border-radius: 4px;
+
+    color: #e0ebe5;
+    font-size: 12px;
+    font-weight: 500;
+
+    transition:
+        background-color 160ms ease,
+        color 160ms ease;
+}
+
+.nav-item:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+}
+
+.nav-item.active {
+    background: var(--green);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Ícones da navegação */
+
+.nav-icon {
+    display: flex;
+    flex: 0 0 14px;
+    align-items: center;
+    justify-content: center;
+
+    width: 14px;
+    height: 14px;
+
+    font-size: 14px;
+}
+
+.nav-icon svg {
+    width: 14px;
+    height: 14px;
+}
+
+.nav-item:focus-visible {
+    outline: 2px solid #7de9b5;
+    outline-offset: 3px;
+}
+
+/* ---------- Rodapé da barra lateral ---------- */
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-top: auto;
+    padding: 24px 5px 0;
+
+    color: #d9e8df;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-bottom: 0;
+    font-size: 10px;
+    font-weight: 400;
+}
+
+.status-dot {
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    background: #30d6a0;
+}
+
+.sidebar-footer small {
+    color: #a9c5b6;
+    font-size: 9px;
+}
+
+/* ---------- Área principal ---------- */
+
+.main-content {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 100vh;
+
+    background: var(--page-bg);
+}
+
+/* ---------- Barra superior ---------- */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex: 0 0 40px;
+    min-height: 40px;
+
+    padding: 0 var(--content-padding);
+}
+
+.profile-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 5px 0;
+
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    font-weight: 500;
+}
+
+.profile-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+/* ---------- Conteúdo da página ---------- */
+
+.page-content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 0 var(--content-padding) 28px;
+}
+
+/* ---------- Cabeçalho da página ---------- */
+
+.page-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    min-height: 44px;
+    margin-bottom: 10px;
+
+    border-bottom: 1px solid #e5ebf3;
+}
+
+h1 {
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* ---------- Botão Novo Grupo ---------- */
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+
+    min-height: 36px;
+    padding: 0 13px;
+
+    border: none;
+    border-radius: 4px;
+
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.button-primary {
+    background: var(--primary-blue);
+    color: #ffffff;
+
+    transition: background-color 160ms ease;
+}
+
+.button-primary:hover {
+    background: #1766e8;
+}
+
+.button-primary:focus-visible {
+    outline: 2px solid var(--primary-blue);
+    outline-offset: 3px;
+}
+
+.plus-icon {
+    font-size: 17px;
+    font-weight: 400;
+}
+
+/* ---------- Grupo ativo ---------- */
+
+.active-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 49px;
+    padding: 8px 14px;
+    margin-bottom: 12px;
+
+    border: 1px solid #b8e7cc;
+    border-radius: 5px;
+
+    background: #e8f6ee;
+}
+
+.active-indicator {
+    flex: 0 0 8px;
+    width: 8px;
+    height: 8px;
+
+    border-radius: 50%;
+    background: #168653;
+}
+
+.active-group-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.active-group-info strong {
+    color: #367653;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+.active-group-info span {
+    color: var(--text-primary);
+    font-size: 12px;
+}
+
+/* ---------- Lista de grupos ---------- */
+
+.groups-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Cartões individuais */
+
+.group-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 15px;
+
+    min-height: 65px;
+    padding: 12px 14px;
+
+    border: 1px solid transparent;
+    border-radius: 5px;
+
+    background: var(--surface);
+
+    transition:
+        border-color 160ms ease,
+        transform 160ms ease;
+}
+
+.group-card:hover {
+    border-color: #b8d9ca;
+    transform: translateY(-1px);
+}
+
+.group-card.is-active {
+    border-color: #8dd9b2;
+}
+
+/* Nome do grupo */
+
+.group-name-area {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.group-name {
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* Identificação de grupo ativo */
+
+.active-badge {
+    padding: 3px 7px;
+
+    border-radius: 20px;
+
+    background: #e0f4e9;
+    color: #278653;
+
+    font-size: 9px;
+    font-weight: 700;
+}
+
+/* Quantidade de horários */
+
+.group-details {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+    font-weight: 600;
+
+    white-space: nowrap;
+}
+
+.group-arrow {
+    color: #91a0b4;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* ---------- Mensagens ---------- */
+
+.loading-message,
+.empty-message {
+    padding: 20px;
+
+    border-radius: 5px;
+    background: #ffffff;
+
+    color: var(--text-secondary);
+    text-align: center;
+    font-size: 12px;
+}
+
+.feedback {
+    margin-top: 12px;
+    color: #c03945;
+    font-size: 11px;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (min-width: 1600px) {
+    :root {
+        --sidebar-width: 220px;
+        --content-padding: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 175px;
+        --content-padding: 16px;
+    }
+
+    .sidebar {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    .group-card {
+        min-height: 60px;
+    }
+}
+
+@media (max-width: 520px) {
+    :root {
+        --sidebar-width: 64px;
+        --content-padding: 12px;
+    }
+
+    .sidebar {
+        align-items: center;
+        padding: 14px 6px 10px;
+    }
+
+    .brand {
+        justify-content: center;
+        padding: 0 0 24px;
+    }
+
+    .brand-text,
+    .nav-item span:not(.nav-icon),
+    .sidebar-footer .system-status span:last-child,
+    .sidebar-footer small {
+        display: none;
+    }
+
+    .brand-icon {
+        flex-basis: 23px;
+    }
+
+    .sidebar-nav {
+        align-items: center;
+    }
+
+    .nav-item {
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    .nav-icon {
+        flex-basis: 18px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-icon svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .sidebar-footer {
+        align-items: center;
+        padding: 20px 0 0;
+    }
+
+    .sidebar-footer .status-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .topbar {
+        padding-right: var(--content-padding);
+    }
+
+    .profile-button span {
+        display: none;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+
+        padding: 10px 0;
+    }
+
+    h1 {
+        font-size: 16px;
+    }
+
+    .active-group {
+        min-height: 45px;
+    }
+
+    .group-card {
+        min-height: 58px;
+        padding: 10px;
+    }
+
+    .group-name {
+        font-size: 12px;
+    }
+
+    .group-details {
+        gap: 8px;
+        font-size: 10px;
+    }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

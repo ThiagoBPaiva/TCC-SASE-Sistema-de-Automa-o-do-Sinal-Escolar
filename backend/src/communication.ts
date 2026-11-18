@@ -10,6 +10,8 @@ export class ArduinoConexion extends Communication {
     private horarios: Array<string> = [];
     private ultimoSinal: Array<string> = [];
 
+    private lastCommunication: string | null = null;
+
     constructor() {
         super()
         // Conexão com a porta Serial USB COM3
@@ -17,7 +19,6 @@ export class ArduinoConexion extends Communication {
             path: "COM3",
             baudRate: 9600
         });
-        this.validationPort();
 
         // Recebendo mensagem do Arduino
         this.parser = this.arduino.pipe(
@@ -32,7 +33,14 @@ export class ArduinoConexion extends Communication {
         });
     }
 
-    validationPort(): void {
+    validationPort(): void | object {
+        if (this.arduino.isOpen) {
+            return {
+                connected: true,
+                port: "COM3",
+                lastCommunication: this.lastCommunication
+            };
+        }
         this.arduino.open((erro) => {
             if (erro && erro.message !== "Port is already open") {
                 console.error("Não foi possível abrir a COM3:", erro.message);
@@ -63,5 +71,5 @@ export class ArduinoConexion extends Communication {
             this.arduino.write("LIGADO\n");
             this.ultimoSinal.push(dateFormat);
         }
-    }
+    }   
 }

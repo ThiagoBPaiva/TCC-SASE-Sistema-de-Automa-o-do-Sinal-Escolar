@@ -21,10 +21,16 @@ router.post("/auth/login", controller.postLogin.bind(controller)); // Logou na c
 
 // Rota para autenticados
 router.get("/auth/home", AsyncMiddlwares, auth.homePage.bind(auth))
+router.get("/auth/createGroup", AsyncMiddlwares, auth.getCreateGroup.bind(auth))
+router.get("/auth/createTime", AsyncMiddlwares, auth.getCreateTime.bind(auth))
+router.get("/auth/groupTime", AsyncMiddlwares, auth.getGroupTime.bind(auth))
 
 // Criação de novos usuarios
 router.get("/signUp", AsyncMiddlwares, auth.getSignUp.bind(auth)); // exibir tela de cadastro
 router.post("/auth/signUp", AsyncMiddlwares, auth.postSignUp.bind(auth)); // Criou a conta
+
+// Verificando a comunicação com o arduino
+router.get("/auth/arduino/status", AsyncMiddlwares, auth.getArduinoCommunication.bind(auth));
 
 // Criação de novos grupos
 router.post("/auth/createGroup", AsyncMiddlwares, auth.postCreateGroupTime.bind(auth));

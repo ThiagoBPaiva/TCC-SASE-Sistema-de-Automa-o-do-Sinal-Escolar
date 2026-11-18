@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import path from "path";
 // ---
-import { ArduinoConexion } from "../communication"
 import { UserService } from "../service/UserService"
 
 
@@ -9,7 +8,6 @@ import { UserService } from "../service/UserService"
  * Classe responsável pela criação e controle das funcionalidades das rotas
  */
 export class Controllers {
-    private arduino = new ArduinoConexion();
     private userService = new UserService();
     constructor() { }
 
@@ -38,10 +36,6 @@ export class Controllers {
         })
 
         console.log('teste')
-        setInterval(() => {
-            this.arduino.validationPort();
-            this.arduino.onArduino();
-        }, 500);
 
         res.status(200).json({ email, token: resultService.token });
     }

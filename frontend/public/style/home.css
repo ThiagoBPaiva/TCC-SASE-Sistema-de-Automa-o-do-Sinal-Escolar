@@ -1,0 +1,672 @@
+/* =========================================================
+   SASE — Sistema de Automação do Sinal Escolar
+   Tela: Comunicação com o Arduino
+   ========================================================= */
+
+/* ---------- Variáveis globais ---------- */
+
+:root {
+    --green: #28bd78;
+    --green-dark: #0caf68;
+    --green-soft: #def7e9;
+
+    --sidebar-bg: #092f20;
+    --sidebar-hover: #12442f;
+
+    --page-bg: #f2f5fa;
+    --surface: #ffffff;
+
+    --text-primary: #253b5b;
+    --text-secondary: #7b8eaa;
+
+    --border: #dce4ee;
+
+    --red: #dc4545;
+    --red-soft: #fde8e8;
+
+    --font-family: Arial, Helvetica, sans-serif;
+
+    --sidebar-width: 200px;
+    --content-padding: 22px;
+}
+
+/* ---------- Reset ---------- */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    min-width: 320px;
+    min-height: 100%;
+    font-family: var(--font-family);
+    -webkit-text-size-adjust: 100%;
+}
+
+body {
+    min-width: 320px;
+    min-height: 100vh;
+    background: var(--page-bg);
+    color: var(--text-primary);
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button,
+a {
+    -webkit-tap-highlight-color: transparent;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+svg {
+    display: block;
+    width: 20px;
+    height: 20px;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+
+/* ---------- Estrutura principal ---------- */
+
+.app {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+    min-height: 100vh;
+    background: var(--page-bg);
+}
+
+/* ---------- Barra lateral ---------- */
+
+.sidebar {
+    position: sticky;
+    top: 0;
+
+    display: flex;
+    flex: 0 0 var(--sidebar-width);
+    flex-direction: column;
+
+    width: var(--sidebar-width);
+    height: 100vh;
+    min-height: 420px;
+
+    padding: 16px 10px 12px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    background: var(--sidebar-bg);
+    color: #ffffff;
+}
+
+/* Marca SASE */
+
+.brand {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    width: 100%;
+    padding: 0 5px 28px;
+
+    color: #ffffff;
+}
+
+.brand-icon {
+    flex: 0 0 23px;
+    width: 23px;
+    height: 23px;
+    margin-top: 1px;
+    color: #d7e9e0;
+}
+
+.brand-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.brand-copy strong {
+    margin-bottom: 2px;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: 0.3px;
+}
+
+.brand-copy small {
+    color: #d1e0d8;
+    font-size: 9px;
+    line-height: 1.35;
+}
+
+/* ---------- Navegação ---------- */
+
+.navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    min-height: 36px;
+    width: 100%;
+    padding: 9px 10px;
+
+    border-radius: 4px;
+
+    color: #e0ebe5;
+    font-size: 12px;
+    font-weight: 500;
+
+    transition:
+        background-color 160ms ease,
+        color 160ms ease;
+}
+
+.nav-link svg {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+}
+
+.nav-link span {
+    min-width: 0;
+}
+
+.nav-link:hover {
+    background: var(--sidebar-hover);
+    color: #ffffff;
+}
+
+.nav-link.active {
+    background: var(--green);
+    color: #ffffff;
+    font-weight: 700;
+}
+
+.nav-link:focus-visible,
+.brand:focus-visible,
+.account-button:focus-visible {
+    outline: 2px solid #7de9b5;
+    outline-offset: 3px;
+}
+
+/* ---------- Rodapé da barra lateral ---------- */
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin-top: auto;
+    padding: 24px 5px 0;
+
+    color: #d9e8df;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 10px;
+}
+
+.status-dot {
+    flex: 0 0 7px;
+    width: 7px;
+    height: 7px;
+
+    border-radius: 50%;
+    background: #30d6a0;
+}
+
+.version {
+    color: #a9c5b6;
+    font-size: 9px;
+}
+
+/* ---------- Área principal ---------- */
+
+.main-area {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+
+    min-width: 0;
+    min-height: 100vh;
+
+    background: var(--page-bg);
+}
+
+/* ---------- Barra superior ---------- */
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    flex: 0 0 40px;
+    min-height: 40px;
+
+    padding: 0 var(--content-padding);
+}
+
+.account-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 7px;
+
+    padding: 5px 0;
+
+    border: 0;
+    background: transparent;
+    color: var(--text-secondary);
+
+    font-size: 10px;
+    cursor: pointer;
+}
+
+.account-button svg {
+    width: 13px;
+    height: 13px;
+}
+
+.account-button .chevron {
+    width: 11px;
+    height: 11px;
+}
+
+/* ---------- Conteúdo da página ---------- */
+
+.content {
+    display: flex;
+    flex: 1 0 auto;
+    flex-direction: column;
+
+    min-width: 0;
+    padding: 0 var(--content-padding) 28px;
+}
+
+/* Título */
+
+.page-heading {
+    display: flex;
+    align-items: center;
+
+    min-height: 44px;
+    margin-bottom: 0;
+
+    border-bottom: 1px solid #e5ebf3;
+}
+
+.page-heading h1 {
+    color: var(--text-primary);
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.35;
+}
+
+/* ---------- Resumo da conexão ---------- */
+
+.connection-summary {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    padding: 16px 12px 18px;
+
+    text-align: center;
+}
+
+.success-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    margin-bottom: 8px;
+
+    border-radius: 50%;
+
+    background: var(--green);
+    color: #ffffff;
+
+    transition:
+        background-color 180ms ease,
+        transform 180ms ease;
+}
+
+.success-icon svg {
+    width: 21px;
+    height: 21px;
+    stroke-width: 2;
+}
+
+.connection-summary h2 {
+    margin-bottom: 5px;
+
+    color: var(--green-dark);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.summary-description {
+    max-width: 380px;
+    margin: 0;
+
+    color: var(--text-secondary);
+    font-size: 11px;
+    line-height: 1.55;
+}
+
+/* ---------- Cartão de informações ---------- */
+
+.details-card {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    width: 100%;
+    padding: 16px 15px;
+
+    border: 1px solid var(--border);
+    border-radius: 3px;
+
+    background: transparent;
+}
+
+.detail-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    min-height: 25px;
+}
+
+.detail-icon {
+    display: flex;
+    flex: 0 0 18px;
+    align-items: center;
+    justify-content: center;
+
+    width: 18px;
+    height: 18px;
+
+    color: #8297b4;
+}
+
+.detail-icon svg {
+    width: 16px;
+    height: 16px;
+}
+
+.detail-copy {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.detail-label {
+    color: var(--text-secondary);
+    font-size: 10px;
+    line-height: 1.4;
+}
+
+.detail-copy strong {
+    overflow-wrap: anywhere;
+
+    color: #526986;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+}
+
+.detail-copy strong.online-text {
+    color: var(--green-dark);
+}
+
+.online-icon {
+    color: var(--green);
+}
+
+/* ---------- Mensagem inferior ---------- */
+
+.ready-banner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+
+    width: 100%;
+    min-height: 40px;
+    margin-top: 12px;
+    padding: 10px 14px;
+
+    border: 1px solid #c9f1dc;
+    border-radius: 3px;
+
+    background: var(--green-soft);
+    color: #12a866;
+
+    text-align: center;
+    font-size: 11px;
+    font-weight: 600;
+
+    transition:
+        background-color 180ms ease,
+        border-color 180ms ease,
+        color 180ms ease;
+}
+
+.ready-banner svg {
+    flex: 0 0 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* ---------- Estado conectado ---------- */
+
+.connection-summary.is-connected .success-icon {
+    background: var(--green);
+}
+
+.connection-summary.is-connected h2 {
+    color: var(--green-dark);
+}
+
+.ready-banner.is-connected {
+    border-color: #c9f1dc;
+    background: var(--green-soft);
+    color: #12a866;
+}
+
+/* ---------- Estado desconectado ---------- */
+
+.connection-summary.is-disconnected .success-icon {
+    background: var(--red);
+}
+
+.connection-summary.is-disconnected h2 {
+    color: var(--red);
+}
+
+.ready-banner.is-disconnected {
+    border-color: #f7caca;
+    background: var(--red-soft);
+    color: #c53030;
+}
+
+.connection-summary.is-disconnected .summary-description {
+    color: #9a6868;
+}
+
+/* ---------- Carregamento e falha de consulta ---------- */
+
+.connection-summary.is-loading .success-icon,
+.connection-summary.has-error .success-icon {
+    background: #8190a9;
+}
+
+.connection-summary.is-loading h2,
+.connection-summary.has-error h2 {
+    color: #607491;
+}
+
+.ready-banner.is-loading,
+.ready-banner.has-error {
+    border-color: var(--border);
+    background: #edf1f7;
+    color: #607491;
+}
+
+/* ---------- Responsividade ---------- */
+
+@media (min-width: 1600px) {
+    :root {
+        --sidebar-width: 220px;
+        --content-padding: 28px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --sidebar-width: 175px;
+        --content-padding: 16px;
+    }
+
+    .sidebar {
+        padding-right: 8px;
+        padding-left: 8px;
+    }
+
+    .page-heading h1 {
+        font-size: 18px;
+    }
+
+    .details-card {
+        padding: 14px 12px;
+    }
+}
+
+@media (max-width: 520px) {
+    :root {
+        --sidebar-width: 64px;
+        --content-padding: 12px;
+    }
+
+    .sidebar {
+        align-items: center;
+        padding: 14px 6px 10px;
+    }
+
+    .brand {
+        justify-content: center;
+        padding: 0 0 24px;
+    }
+
+    .brand-copy,
+    .nav-link span,
+    .sidebar-footer .system-status span:last-child,
+    .version {
+        display: none;
+    }
+
+    .brand-icon {
+        flex-basis: 23px;
+    }
+
+    .navigation {
+        align-items: center;
+    }
+
+    .nav-link {
+        justify-content: center;
+        padding: 10px 5px;
+    }
+
+    .nav-link svg {
+        flex-basis: 18px;
+        width: 18px;
+        height: 18px;
+    }
+
+    .sidebar-footer {
+        align-items: center;
+        padding: 20px 0 0;
+    }
+
+    .sidebar-footer .status-dot {
+        width: 8px;
+        height: 8px;
+    }
+
+    .topbar {
+        padding-right: var(--content-padding);
+    }
+
+    .account-button span {
+        display: none;
+    }
+
+    .page-heading {
+        min-height: 48px;
+    }
+
+    .page-heading h1 {
+        font-size: 16px;
+    }
+
+    .connection-summary {
+        padding-top: 20px;
+        padding-bottom: 20px;
+    }
+
+    .details-card {
+        gap: 15px;
+    }
+
+    .ready-banner {
+        font-size: 10px;
+    }
+}
+
+/* ---------- Movimento reduzido ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
+}

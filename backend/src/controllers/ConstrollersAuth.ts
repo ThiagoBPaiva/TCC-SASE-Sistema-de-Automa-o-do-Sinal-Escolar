@@ -2,6 +2,7 @@ import { Request, Response } from 'express'
 import path from 'path'
 // ------
 import { AuthUserService } from "../service/AuthUserService"
+import { arduino } from '../app';
 
 
 export class AuthConstrollers {
@@ -24,6 +25,68 @@ export class AuthConstrollers {
         res.sendFile(
             path.join(__dirname, "../../../frontend/public/pages/signUp.html")
         )
+    }
+
+    public getCreateGroup(req: Request, res: Response): void {
+        res.sendFile(
+            path.join(__dirname, "../../../frontend/public/pages/groupTimeCreate.html")
+        );
+    }
+
+    public getCreateTime(req: Request, res: Response): void {
+        res.sendFile(
+            path.join(__dirname, "../../../frontend/public/pages/createTime.html")
+        );
+    }
+
+    public getGroupTime(req: Request, res: Response): void {
+        res.sendFile(
+            path.join(__dirname, "../../../frontend/public/pages/groupTime.html")
+        )
+    }
+
+    // GET METHODES ----------------------
+
+    async getArduinoCommunication(req: Request, res: Response): Promise<void> {
+        try {
+            const status = arduino.validationPort();
+
+            res.status(200).json(status);
+        } catch (erro) {
+            console.error("Erro ao consultar o Arduino:", erro);
+
+            res.status(500).json({
+                message: "Erro interno ao consultar o Arduino."
+            });
+        }
+    }
+
+    async getAllGroupTime(req: Request, res: Response): Promise<void> {
+        const resultService = await this.authUserService.getAllGroupTime();
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
+
+        res.status(resultService.code).json(
+            resultService.group
+        );
+    }
+
+    async getActivityGroupTime(req: Request, res: Response): Promise<void> {
+        const resultService = await this.authUserService.getActivvvityGroup();
+        if (resultService.code !== 200) {
+            res.status(resultService.code).send(
+                resultService.error
+            )
+            return
+        }
+
+        res.status(resultService.code).json(
+            resultService.group
+        );
     }
 
     // POST METHODES ----------------------
@@ -86,34 +149,6 @@ export class AuthConstrollers {
 
         res.status(resultService.code).send(
             resultService.message
-        );
-    }
-
-    async getAllGroupTime(req: Request, res: Response): Promise<void> {
-        const resultService = await this.authUserService.getAllGroupTime();
-        if (resultService.code !== 200) {
-            res.status(resultService.code).send(
-                resultService.error
-            )
-            return
-        }
-
-        res.status(resultService.code).json(
-            resultService.group
-        );
-    }
-
-    async getActivityGroupTime(req: Request, res: Response): Promise<void> {
-        const resultService = await this.authUserService.getActivvvityGroup();
-        if (resultService.code !== 200) {
-            res.status(resultService.code).send(
-                resultService.error
-            )
-            return
-        }
-
-        res.status(resultService.code).json(
-            resultService.group
         );
     }
 }

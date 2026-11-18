@@ -1,0 +1,163 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Página-1" id="KOze9rP4J-4Zb8db6BeM">
+    <mxGraphModel dx="2689" dy="229" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="827" pageHeight="1169" background="light-dark(#FFFFFF,#E4E4E4)" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-49" parent="1" style="swimlane;" value="Ao logar no sistema" vertex="1">
+          <mxGeometry height="530" width="520" x="-1040" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-167" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-49" source="Q3WyjHwh-Nn9ncrYioTl-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-1" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="ellipse;whiteSpace=wrap;html=1;shapeInside=1;" value="Usuário loga no sistema" vertex="1">
+          <mxGeometry height="80" width="120" x="170" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-169" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-49" source="Q3WyjHwh-Nn9ncrYioTl-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-9">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-2" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="whiteSpace=wrap;html=1;" value="Realizar a comunicação com o arduino" vertex="1">
+          <mxGeometry height="60" width="120" x="340" y="235" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-168" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-49" source="Q3WyjHwh-Nn9ncrYioTl-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-6">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-4" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="whiteSpace=wrap;html=1;" value="Verificar se ele está conectado corretamente ao computador" vertex="1">
+          <mxGeometry height="60" width="120" x="170" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-8" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-49" source="Q3WyjHwh-Nn9ncrYioTl-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-2">
+          <mxGeometry relative="1" x="0.0213" as="geometry">
+            <mxPoint x="260" y="70.00000000000011" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-10" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-8" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="SIM" vertex="1">
+          <mxGeometry relative="1" x="0.1094" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-164" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-49" source="Q3WyjHwh-Nn9ncrYioTl-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-163" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-165" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-164" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NÃO" vertex="1">
+          <mxGeometry relative="1" x="0.36" y="-2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-6" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;" value="Ele está conectado?" vertex="1">
+          <mxGeometry height="100" width="140" x="160" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-9" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="rounded=0;whiteSpace=wrap;html=1;" value="Prosseguir com o sistema" vertex="1">
+          <mxGeometry height="60" width="120" x="340" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-163" parent="Q3WyjHwh-Nn9ncrYioTl-49" style="whiteSpace=wrap;html=1;" value="Mensagem de erro na conexão Arduino &amp;lt;-&amp;gt; PC" vertex="1">
+          <mxGeometry height="60" width="120" x="20" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-107" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Sistema em funcionamento" vertex="1">
+          <mxGeometry height="530" width="740" x="-520" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-132" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Consultar o banco de dados da aplicação" vertex="1">
+          <mxGeometry height="60" width="120" x="40" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-133" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-134" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-136" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-134" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Consultar o horário pelo computador, usando a função Date()" vertex="1">
+          <mxGeometry height="60" width="120" x="230" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-135" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-136" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-138" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-136" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Consultar horários" vertex="1">
+          <mxGeometry height="60" width="120" x="400" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-137" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-138" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-143" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-138" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Analisar o grupo de horários a qual o horário pertence." vertex="1">
+          <mxGeometry height="60" width="120" x="575" y="40" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-139" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-145">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-140" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-139" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NÃO" vertex="1">
+          <mxGeometry relative="1" x="-0.05" y="2" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-141" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-143" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-149" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-142" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-141" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="SIM" vertex="1">
+          <mxGeometry relative="1" x="-0.4326" y="-1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-143" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;rounded=0;" value="O horário está no grupo de horarios habilitado?" vertex="1">
+          <mxGeometry height="110" width="130" x="570" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-144" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-145" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-136">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-145" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Ir para o próximo horário" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-146" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-145">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="420" y="375" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-147" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-146" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="SIM" vertex="1">
+          <mxGeometry relative="1" x="-0.3962" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-148" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-149" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.5;entryDx=0;entryDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-151" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-149" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;rounded=0;" value="O horário já foi acionado?" vertex="1">
+          <mxGeometry height="110" width="160" x="555" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-150" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-151" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-153" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-151" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Horário configurado para acionar." vertex="1">
+          <mxGeometry height="60" width="120" x="490" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-152" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-153" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-154" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-153" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Esperar o horário tocar" vertex="1">
+          <mxGeometry height="60" width="120" x="320" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-156" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-154" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-153">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-157" connectable="0" parent="Q3WyjHwh-Nn9ncrYioTl-156" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" value="NÃO" vertex="1">
+          <mxGeometry relative="1" x="-0.4833" y="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-159" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-154" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-158" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-154" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="rhombus;whiteSpace=wrap;html=1;shapeInside=1;rounded=0;" value="O horário do pc é igual a esse horáriow" vertex="1">
+          <mxGeometry height="100" width="120" x="140" y="350" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-155" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-132" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" target="Q3WyjHwh-Nn9ncrYioTl-134" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-161" edge="1" parent="Q3WyjHwh-Nn9ncrYioTl-107" source="Q3WyjHwh-Nn9ncrYioTl-158" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-145">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-158" parent="Q3WyjHwh-Nn9ncrYioTl-107" style="whiteSpace=wrap;html=1;rounded=0;" value="Tocar o sinal" vertex="1">
+          <mxGeometry height="60" width="120" x="10" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="Q3WyjHwh-Nn9ncrYioTl-162" edge="1" parent="1" source="Q3WyjHwh-Nn9ncrYioTl-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" target="Q3WyjHwh-Nn9ncrYioTl-132" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

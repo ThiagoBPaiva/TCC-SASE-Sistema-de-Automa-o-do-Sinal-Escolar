@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SASE — Novo Horário</title>
+    <link rel="stylesheet" href="../style/admin-visual.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><img src="../assets/SASE%20ICON.png" alt="SASE">
+                <div><strong>SASE</strong><small>Sinal Escolar Inteligente</small></div>
+            </div>
+            <nav class="nav"><a class="" href="home.html"><span class="nav-icon">⌂</span>Home</a><a class=""
+                    href="groups.html"><span class="nav-icon">▦</span>Grupos de Horários</a><a class="active"
+                    href="times.html"><span class="nav-icon">◷</span>Horários</a><a class="" href="users.html"><span
+                        class="nav-icon">♙</span>Usuários</a></nav>
+            <div class="sidebar-foot">Sistema de Automação<br>do Sinal Escolar</div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div class="crumb">SASE&nbsp; / &nbsp;Novo Horário</div>
+                <div class="profile"><span class="avatar">S</span><span>Área administrativa</span></div>
+            </header>
+            <section class="content">
+                <div class="heading">
+                    <div>
+                        <h1>Novo Horário</h1>
+                        <p>Associe um horário a um grupo escolar.</p>
+                    </div>
+                </div>
+                <section class="card form-card">
+                    <h2>Informações do horário</h2>
+                    <p class="sub">Associe um horário a um grupo escolar.</p>
+                    <form>
+                        <div class="field"><label for="group">Grupo de horários *</label><select id="group" required>
+                                <option value="">Selecione um grupo</option>
+                                <option>Normal</option>
+                                <option>Integral</option>
+                                <option>Noturno</option>
+                            </select></div>
+                        <div class="field"><label for="time">Horário *</label><input id="time" type="time" required>
+                        </div>
+                        <div class="form-actions"><a class="btn secondary" href="times.html">Cancelar</a><button
+                                class="btn primary" type="button">Salvar horário</button></div>
+                    </form>
+                    <p class="hint">Formulário demonstrativo: o botão ainda não salva informações.</p>
+                </section>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

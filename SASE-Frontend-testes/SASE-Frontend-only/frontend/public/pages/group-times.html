@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SASE — Horários — Grupo Selecionado</title>
+    <link rel="stylesheet" href="../style/admin-visual.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><img src="../assets/SASE%20ICON.png" alt="SASE">
+                <div><strong>SASE</strong><small>Sinal Escolar Inteligente</small></div>
+            </div>
+            <nav class="nav"><a class="" href="home.html"><span class="nav-icon">⌂</span>Home</a><a class="active"
+                    href="groups.html"><span class="nav-icon">▦</span>Grupos de Horários</a><a class=""
+                    href="times.html"><span class="nav-icon">◷</span>Horários</a><a class="" href="users.html"><span
+                        class="nav-icon">♙</span>Usuários</a></nav>
+            <div class="sidebar-foot">Sistema de Automação<br>do Sinal Escolar</div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div class="crumb">SASE&nbsp; / &nbsp;Horários — Grupo Selecionado</div>
+                <div class="profile"><span class="avatar">S</span><span>Área administrativa</span></div>
+            </header>
+            <section class="content">
+                <div class="heading">
+                    <div>
+                        <h1>Horários — Grupo Selecionado</h1>
+                        <p>Visualize os horários associados ao grupo selecionado.</p>
+                    </div>
+                </div>
+                <section class="card">
+                    <div class="detail-head">
+                        <div>
+                            <h2><span class="badge-icon">◷</span>Horários associados ao grupo</h2>
+                            <p class="sub" style="margin:8px 0 0">Grupo selecionado: <strong
+                                    id="groupName">Integral</strong></p>
+                        </div><a class="btn primary" href="new-time.html">＋ Novo Horário</a>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Horário</th>
+                                    <th>Estado do grupo</th>
+                                    <th>Grupo</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="name">15:00</td>
+                                    <td><span class="status on">Ativo</span></td>
+                                    <td id="groupCell">Integral</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <p class="footer-note"><a class="link" href="groups.html">← Voltar para Grupos de Horários</a></p>
+                <script>const p = new URLSearchParams(location.search); const g = p.get('group') || 'Integral'; document.getElementById('groupName').textContent = g; document.getElementById('groupCell').textContent = g; document.title = 'SASE — Horários: ' + g;</script>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>

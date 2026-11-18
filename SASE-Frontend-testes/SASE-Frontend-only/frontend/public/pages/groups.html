@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>SASE — Grupos de Horários</title>
+    <link rel="stylesheet" href="../style/admin-visual.css">
+</head>
+
+<body>
+    <div class="app">
+        <aside class="sidebar">
+            <div class="brand"><img src="../assets/SASE%20ICON.png" alt="SASE">
+                <div><strong>SASE</strong><small>Sinal Escolar Inteligente</small></div>
+            </div>
+            <nav class="nav"><a class="" href="home.html"><span class="nav-icon">⌂</span>Home</a><a class="active"
+                    href="groups.html"><span class="nav-icon">▦</span>Grupos de Horários</a><a class=""
+                    href="times.html"><span class="nav-icon">◷</span>Horários</a><a class="" href="users.html"><span
+                        class="nav-icon">♙</span>Usuários</a></nav>
+            <div class="sidebar-foot">Sistema de Automação<br>do Sinal Escolar</div>
+        </aside>
+        <main class="main">
+            <header class="topbar">
+                <div class="crumb">SASE&nbsp; / &nbsp;Grupos de Horários</div>
+                <div class="profile"><span class="avatar">S</span><span>Área administrativa</span></div>
+            </header>
+            <section class="content">
+                <div class="heading">
+                    <div>
+                        <h1>Grupos de Horários</h1>
+                        <p>Organize os horários escolares por grupo.</p>
+                    </div><a class="btn primary" href="new-group.html">＋ Novo Grupo</a>
+                </div>
+                <section class="card">
+                    <div class="toolbar">
+                        <div>
+                            <h2>Grupos cadastrados</h2>
+                            <p class="sub">Exemplo visual dos grupos de horários.</p>
+                        </div><input class="search" placeholder="Buscar grupo..." aria-label="Buscar grupo">
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Nome do grupo</th>
+                                    <th>Estado</th>
+                                    <th>Horários</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>
+                                        <div class="name">Normal</div>
+                                        <div class="muted">Grupo de horários escolares</div>
+                                    </td>
+                                    <td><span class="status on">Ativo</span></td>
+                                    <td>07:00</td>
+                                    <td>
+                                        <div class="actions"><a class="link" href="group-times.html?group=Normal">Ver
+                                                horários →</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="name">Integral</div>
+                                        <div class="muted">Grupo de horários escolares</div>
+                                    </td>
+                                    <td><span class="status on">Ativo</span></td>
+                                    <td>15:00</td>
+                                    <td>
+                                        <div class="actions"><a class="link" href="group-times.html?group=Integral">Ver
+                                                horários →</a></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div class="name">Noturno</div>
+                                        <div class="muted">Grupo de horários escolares</div>
+                                    </td>
+                                    <td><span class="status off">Inativo</span></td>
+                                    <td>19:00</td>
+                                    <td>
+                                        <div class="actions"><a class="link" href="group-times.html?group=Noturno">Ver
+                                                horários →</a></div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+                <p class="footer-note">Os registros exibidos são exemplos de apresentação, não dados do banco.</p>
+            </section>
+        </main>
+    </div>
+</body>
+
+</html>
