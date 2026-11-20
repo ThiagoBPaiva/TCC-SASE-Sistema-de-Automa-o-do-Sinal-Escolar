@@ -71,5 +71,5 @@ export class ArduinoConexion extends Communication {
             this.arduino.write("LIGADO\n");
             this.ultimoSinal.push(dateFormat);
         }
-    }   
+    }
 }

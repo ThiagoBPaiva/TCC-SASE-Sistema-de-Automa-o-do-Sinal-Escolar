@@ -32,7 +32,35 @@ const validationActivity = z.object({
     activity: z.enum(['on', 'off'])
 })
 
+const validationId = z.object({
+    id: z.string().min(26).max(26)
+})
+
+function formatTime(time: string) {
+    const [hours, minutes] = String(time).split(":");
+
+    return `${hours.padStart(2, "0")}:${minutes.padStart(2, "0")}`;
+}
+
 export class AuthUserService extends Communication {
+    public async getTimeFromGroupService(id: string): Promise<returnFunction> {
+        try {
+            const validation = validationId.safeParse({ id })
+            const getTime = await this.DBGetValues(Tables.horarios, 'id_group', id)
+
+
+            if (!validation.success) {
+                throw new Error('Erro! Dados invalidos, por favor, tente novamente');
+            }
+            // console.log("passou aqui")
+
+            return { code: 200, group: getTime }
+        } catch (error) {
+            return { code: 500, error: 'Get Time for Group Error.' };
+        }
+    }
+
+
     public async createNewUserService(user: string, password: string, email: string): Promise<returnFunction> {
         try {
             const validation = validationSignUser.safeParse({ user: user, password: password, email: email });
@@ -116,12 +144,17 @@ export class AuthUserService extends Communication {
 
             const validation = validationTime.safeParse({ id: idGroup, time: horarioArual });
             const timeExisti = await this.DBGetValues(Tables.horarios, 'time', horarioArual);
+            const idGroupFromTime = await this.DBGetValues(Tables.horarios, 'id_group', idGroup)
             const groupTimeExisti = await this.DBGetValues(Tables.grupoDeHorarios, 'id', idGroup);
 
+            for (let i = 0; i < idGroupFromTime.length; i++) {
+                const formatTimeDb = formatTime(idGroupFromTime[i].time);
+                if (formatTimeDb == time) {
+                    return { code: 406, error: "Horário já cadastrado neste grupo de horário" }
+                }
+            }
             if (!validation.success) {
                 return { code: 400, error: "Horário invalido, digite o horário da forma solicitada" };
-            } else if (timeExisti.length >= 1) {
-                return { code: 406, error: "Horário já cadastrado neste grupo de horário" };
             } else if (groupTimeExisti.length <= 0) {
                 return { code: 406, error: "Grupo de horário inexistente, por favor, digite-o corretamente" };
             }

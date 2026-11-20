@@ -45,6 +45,12 @@ export class AuthConstrollers {
         )
     }
 
+    public getTimeFromGroup(req: Request, res: Response): void {
+        res.sendFile(
+            path.join(__dirname, "../../../frontend/public/pages/viewTimeForGroup.html")
+        )
+    }
+
     // GET METHODES ----------------------
 
     async getArduinoCommunication(req: Request, res: Response): Promise<void> {
@@ -67,7 +73,7 @@ export class AuthConstrollers {
             res.status(resultService.code).send(
                 resultService.error
             )
-            return
+            return;
         }
 
         res.status(resultService.code).json(
@@ -81,12 +87,28 @@ export class AuthConstrollers {
             res.status(resultService.code).send(
                 resultService.error
             )
-            return
+            return;
         }
 
         res.status(resultService.code).json(
             resultService.group
         );
+    }
+
+    async getTimeFromGroupBack(req: Request, res: Response): Promise<void> {
+        const id = req.params.id;
+        console.log(id);
+        const resultlService = await this.authUserService.getTimeFromGroupService(String(id));
+        if (resultlService.code !== 200) {
+            res.status(resultlService.code).send(
+                resultlService.error
+            )
+            return;
+        }
+
+        res.status(resultlService.code).json(
+            resultlService.group
+        )
     }
 
     // POST METHODES ----------------------

@@ -24,6 +24,7 @@ router.get("/auth/home", AsyncMiddlwares, auth.homePage.bind(auth))
 router.get("/auth/createGroup", AsyncMiddlwares, auth.getCreateGroup.bind(auth))
 router.get("/auth/createTime", AsyncMiddlwares, auth.getCreateTime.bind(auth))
 router.get("/auth/groupTime", AsyncMiddlwares, auth.getGroupTime.bind(auth))
+router.get("/auth/schedules", AsyncMiddlwares, auth.getTimeFromGroup.bind(auth));
 
 // Criação de novos usuarios
 router.get("/signUp", AsyncMiddlwares, auth.getSignUp.bind(auth)); // exibir tela de cadastro
@@ -42,3 +43,6 @@ router.post("/auth/update/activityTime", AsyncMiddlwares, auth.postUpdatGroupTim
 router.get("/auth/allTime", AsyncMiddlwares, auth.getAllGroupTime.bind(auth));
 // Mostrar horário ativo
 router.get("/auth/timeActivity", AsyncMiddlwares, auth.getActivityGroupTime.bind(auth));
+// Consultar horarios de cada grupo
+router.get("/auth/schedules/get/:id", AsyncMiddlwares, auth.getTimeFromGroupBack.bind(auth));
+

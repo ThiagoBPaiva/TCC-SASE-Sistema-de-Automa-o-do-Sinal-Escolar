@@ -7,6 +7,7 @@
 
     <title>Grupos de Horários | SASE</title>
 
+    <link rel="stylesheet" href="../style/home.css">
     <link rel="stylesheet" href="../style/groupTime.css">
     <script src="../script/groupTime.js" defer></script>
 </head>
@@ -14,29 +15,36 @@
 <body>
     <div class="app-layout">
 
+        <!-- SIDEBAR -->
         <aside class="sidebar">
-            <a href="home.html" class="brand">
-                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                    aria-hidden="true">
+
+            <!-- LOGO -->
+            <a href="/auth/home" class="brand">
+
+                <svg class="brand-icon" viewBox="0 0 24 24" aria-hidden="true">
                     <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
                     <path d="M10 21h4" />
                 </svg>
 
-                <div class="brand-text">
+                <div class="brand-copy">
                     <strong>SASE</strong>
-                    <span>Sistema de Automação<br>de Sinal Escolar</span>
+                    <small>Sistema de Automação<br>de Sinal Escolar</small>
                 </div>
+
             </a>
 
-            <nav class="sidebar-nav" aria-label="Navegação principal">
-                <a href="/auth/home" class="nav-item">
+
+            <!-- NAVEGAÇÃO -->
+            <nav class="navigation" aria-label="Navegação principal">
+
+                <a href="/auth/home" class="nav-link">
                     <svg viewBox="0 0 24 24">
                         <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
                     </svg>
                     <span>Início</span>
                 </a>
 
-                <a href="/auth/groupTime" class="nav-item active">
+                <a href="/auth/groupTime" class="nav-link active">
                     <svg viewBox="0 0 24 24">
                         <rect x="4" y="5" width="16" height="16" rx="2" />
                         <path d="M8 3v4m8-4v4M4 10h16" />
@@ -44,7 +52,7 @@
                     <span>Grupos de Horários</span>
                 </a>
 
-                <a href="/auth/createTime" class="nav-item">
+                <a href="/auth/createTime" class="nav-link">
                     <svg viewBox="0 0 24 24">
                         <circle cx="12" cy="12" r="9" />
                         <path d="M12 7v5l3 2" />
@@ -52,15 +60,15 @@
                     <span>Horários</span>
                 </a>
 
-                <a href="" class="nav-item">
+                <a href="/auth/activation" class="nav-link">
                     <svg viewBox="0 0 24 24">
-                        <circle cx="12" cy="12" r="9"></circle>
-                        <path d="m8 12 3 3 5-6"></path>
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="m8 12 3 3 5-6" />
                     </svg>
                     <span>Ativação de grupos</span>
                 </a>
 
-                <a href="usuarios.html" class="nav-item">
+                <a href="/auth/users" class="nav-link">
                     <svg viewBox="0 0 24 24">
                         <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
                         <circle cx="10" cy="7" r="4" />
@@ -68,15 +76,22 @@
                     </svg>
                     <span>Usuários</span>
                 </a>
+
             </nav>
 
+
+            <!-- RODAPÉ -->
             <div class="sidebar-footer">
+
                 <div class="system-status">
                     <span class="status-dot"></span>
                     <span>Sistema Online</span>
                 </div>
-                <small>v1.0.0</small>
+
+                <span class="version">v1.0.0</span>
+
             </div>
+
         </aside>
 
         <main class="main-content">

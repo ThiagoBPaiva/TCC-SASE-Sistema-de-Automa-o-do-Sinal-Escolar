@@ -10,7 +10,7 @@ import { ulid } from "ulid"
 
 
 export class Communication {
-    private id = ulid();
+    // private id = ulid();
     constructor() { }
 
     //--------------------------------------------------------------

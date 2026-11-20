@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Horários do Grupo | SASE</title>
+
+    <link rel="stylesheet" href="../style/viewTimeForGroup.css">
+    <script src="../script/viewTimeForGroup.js" defer></script>
+</head>
+
+<body>
+    <div class="app-layout">
+
+        <!-- Barra lateral: estrutura baseada em groupTime.html -->
+        <aside class="sidebar">
+
+            <a href="/auth/home" class="brand">
+                <svg class="brand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                    aria-hidden="true">
+                    <path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9" />
+                    <path d="M10 21h4" />
+                </svg>
+
+                <div class="brand-text">
+                    <strong>SASE</strong>
+                    <span>Sistema de Automação<br>de Sinal Escolar</span>
+                </div>
+            </a>
+
+            <nav class="sidebar-nav" aria-label="Navegação principal">
+
+                <a href="/auth/home" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z" />
+                    </svg>
+                    <span>Início</span>
+                </a>
+
+                <a href="/auth/groupTime" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="4" y="5" width="16" height="16" rx="2" />
+                        <path d="M8 3v4m8-4v4M4 10h16" />
+                    </svg>
+                    <span>Grupos de Horários</span>
+                </a>
+
+                <a href="/auth/createTime" class="nav-item active">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="M12 7v5l3 2" />
+                    </svg>
+                    <span>Horários</span>
+                </a>
+
+                <a href="" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="12" r="9" />
+                        <path d="m8 12 3 3 5-6" />
+                    </svg>
+                    <span>Ativação de grupos</span>
+                </a>
+
+                <a href="usuarios.html" class="nav-item">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                        <circle cx="10" cy="7" r="4" />
+                        <path d="M20 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg>
+                    <span>Usuários</span>
+                </a>
+
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="system-status">
+                    <span class="status-dot"></span>
+                    <span>Sistema Online</span>
+                </div>
+
+                <small>v1.0.0</small>
+            </div>
+
+        </aside>
+
+        <!-- Conteúdo principal -->
+        <main class="main-content">
+
+            <header class="topbar">
+                <button class="profile-button" type="button">
+                    <span>♙</span>
+                    Administrador
+                    <span>⌄</span>
+                </button>
+            </header>
+
+            <section class="page-content">
+
+                <!-- Cabeçalho -->
+                <div class="page-heading">
+
+                    <div class="heading-info">
+                        <h1 id="group-name">Carregando grupo...</h1>
+                        <p>Gerencie os horários cadastrados neste grupo.</p>
+                    </div>
+
+                    <div class="heading-actions">
+
+                        <button type="button" id="delete-group" class="button button-danger">
+                            Excluir grupo
+                        </button>
+
+                        <a href="/auth/createTime" class="button button-primary">
+                            <span class="plus-icon">+</span>
+                            Adicionar Horário
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Grupo ativo -->
+                <section class="active-group">
+
+                    <span class="active-indicator"></span>
+
+                    <div class="active-group-info">
+                        <strong>Grupo de horários ativo</strong>
+
+                        <span id="active-group-name">
+                            Carregando...
+                        </span>
+
+                        <small>
+                            Gerencie a ativação na aba Ativação de grupos.
+                        </small>
+                    </div>
+
+                </section>
+
+                <!-- Lista de horários -->
+                <section id="schedules-list" class="schedules-list" aria-label="Horários cadastrados"
+                    aria-live="polite">
+
+                    <p class="loading-message">
+                        Carregando horários...
+                    </p>
+
+                </section>
+
+                <p id="schedules-feedback" class="feedback" role="status" hidden>
+                </p>
+
+                <!-- Modelo para renderização dos horários pelo JavaScript -->
+                <template id="schedule-template">
+
+                    <article class="schedule-item">
+
+                        <span class="schedule-time"></span>
+
+                        <div class="schedule-actions">
+
+                            <button type="button" class="delete-schedule">
+                                Excluir
+                            </button>
+
+                            <span class="schedule-arrow" aria-hidden="true">
+                                ›
+                            </span>
+
+                        </div>
+
+                    </article>
+
+                </template>
+
+            </section>
+
+        </main>
+
+    </div>
+</body>
+
+</html>
